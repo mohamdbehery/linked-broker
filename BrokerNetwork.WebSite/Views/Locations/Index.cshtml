@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BrokerNetwork.Models.Location>
+
+@{
+    ViewBag.Title = "تحكم مواقع العمل";
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.Title</h3>
+        <div class="actions">
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    @Html.ActionLink("اضافة موقع", "Create", null, new { @class = "dropdown-item" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table id="data-table" class="table table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th>
+                            الموقع
+                        </th>
+                        @*<th>
+                            نشط
+                        </th>*@
+                        <th>خيارات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.LocationName)
+                            </th>
+                            @*<th>
+                                @Html.DisplayFor(modelItem => item.IsActive)
+                            </th>*@
+                            <td class="actions-btns">
+                                <a href="@Url.Action("Edit", "Locations", new { id = item.LocationID })" title="تعديل"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a>
+                                <a onclick="ShowModal('Locations/Delete/@item.LocationID')" title="حذف"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

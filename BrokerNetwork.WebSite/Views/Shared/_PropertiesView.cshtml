@@ -1,0 +1,71 @@
+﻿@model BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>
+@{
+    var CurrentUser = new BrokerNetwork.Models.Model.AppUser(User as System.Security.Claims.ClaimsPrincipal);
+
+}
+@if (Model.DataType == BrokerNetwork.Models.Model.FilterListDataType.Properties)
+{
+    foreach (var item in Model.Data)
+    {
+        <div class="prop-rpt-view col-lg-2 col-md-4 col-sm-6">
+            <a href="/PropertyDetails/@item.PropertyID">
+                <div class="prop-rpt-img">
+                    @if (!string.IsNullOrEmpty(item.DefaultImage))
+                    {
+                        <img src="~/Uploads/Properties/@item.DefaultImage" />
+                    }
+                    else
+                    {
+                        <img src="~/img/default.jpg" />
+                    }
+                </div>
+                <div class="prop-rpt-details">
+                    <h2 class="title1">
+                        @item.Title
+                    </h2>
+                    <h3 class="sub-title1">@item.PropTypeTitle @item.PropPurposeTitle- <span class="en-number">@item.Area</span> متر</h3>
+                    <h4 class="sub-title2"> @item.LocationName / @item.OwnerShipTitle</h4>
+                    @*@if (item.UserID == CurrentUser.UserID)
+                    {
+                        <div class="row">
+                            <div class="col-md-3">
+                                @Html.ActionLink("تعديل", "Edit", "MyProperties", new { id = item.PropertyID }, null)
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ActionLink("حذف", "Delete", "MyProperties", new { id = item.PropertyID }, null)
+                            </div>
+                        </div>
+                    }*@
+                </div>
+            </a>
+        </div>
+    }
+}
+else
+{
+    foreach (var item in Model.Data)
+    {
+        <div class="prop-rpt-view col-lg-2 col-md-4 col-sm-6">
+            <a href="/RequestDetails/@item.PropertyID">
+                <div class="prop-rpt-img">
+                    @if (!string.IsNullOrEmpty(item.DefaultImage))
+                    {
+                        <img src="~/Uploads/Properties/@item.DefaultImage" />
+                    }
+                    else
+                    {
+                        <img src="~/img/default.jpg" />
+                    }
+                </div>
+                <div class="prop-rpt-details">
+                    <h2 class="title1">
+                        @item.Title
+                    </h2>
+                    <h3 class="sub-title1">@item.PropTypeTitle @item.PropPurposeTitle</h3>
+                    <h4 class="sub-title2"> @item.LocationName @(!string.IsNullOrEmpty(item.OwnerShipTitle) ? "/ " + item.OwnerShipTitle : "")</h4>
+                </div>
+            </a>
+        </div>
+    }
+}
+@Html.Partial("_Paging", Model)

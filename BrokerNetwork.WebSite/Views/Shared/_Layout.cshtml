@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - LinkedBrokers</title>
+    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="~/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/favicon.ico" type="image/x-icon">
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/vendors/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css">
+    <link rel="stylesheet" href="/vendors/bower_components/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="/vendors/bower_components/dropzone/dist/dropzone.css">
+    <link rel="stylesheet" href="/vendors/bower_components/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="/vendors/bower_components/nouislider/distribute/nouislider.min.css">
+    <link rel="stylesheet" href="/vendors/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
+    <link rel="stylesheet" href="/vendors/bower_components/trumbowyg/dist/ui/trumbowyg.min.css">
+    <!-- App styles -->
+    @*<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-naskh" type="text/css" />*@
+    <link rel="stylesheet" href="/css/app.min.css">
+    <link href="/css/CustomStyles.css" rel="stylesheet" />
+    <link href="/css/MediaQuery.css" rel="stylesheet" />
+
+    @*<link href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.material.min.css" rel="stylesheet" />
+        <link href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.material.mobile.min.css" rel="stylesheet" />
+        <link href="http://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.rtl.min.css" rel="stylesheet" />*@
+    <link href="~/Content/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo.rtl.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/w3.css">
+    <link href="~/Content/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <style type="text/css">
+        .custom-file-upload input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #7c5151;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+            .custom-file-upload i {
+                color: black !important;
+            }
+    </style>
+</head>
+<body data-ma-theme="green" class="k-rtl">
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary modal-yes-btn">نعم</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imgModal" class="modal modalImag">
+        <span class="imgModalClose">&times;</span>
+        <span class="imgModalDownload glyphicon glyphicon-download"></span>
+        <img class="modal-content" id="imgModalSrc">
+        <div class="clearfix"></div>
+    </div>
+    <main class="main">
+        <div class="page-loader">
+            <div class="page-loader__spinner">
+                <svg viewBox="25 25 50 50">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+        <header class="header">
+            <div class="navbar-app">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+                        <div class="navigation-trigger__inner">
+                            <i class="navigation-trigger__line"></i>
+                            <i class="navigation-trigger__line"></i>
+                            <i class="navigation-trigger__line"></i>
+                        </div>
+                    </div>
+                }
+                <div class="header__logo">
+                    <a href="/">
+                        <img onerror='this.src = "/img/default.jpg"' src="~/img/logo.png" />
+                        <h1>
+                            LinkedBrokers
+                        </h1>
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-icons">
+                <form class="search" name="search" action="/Search" method="get" id="search">
+                    <div class="search__inner">
+                        <input type="text" name="searchText" id="searchText" class="search__text" placeholder="ابحث عن الوسطاء...">
+                        <i class="zmdi zmdi-search search__helper" data-ma-action="search-close"></i>
+                    </div>
+                </form>
+                <ul class="top-nav">
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/Logout"><img onerror='this.src = "/img/default.jpg"' src="~/img/logout.png" /></a>
+                        }
+                        else
+                        {
+                            <a href="/Login"><img onerror='this.src = "/img/default.jpg"' src="~/img/login.png" /></a>
+                        }
+                    </li>
+                    <li class="hidden-xl-up"><a href="#" data-ma-action="search-open"><i class="zmdi zmdi-search"></i></a></li>
+                </ul>
+            </div>
+        </header>
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            <aside class="sidebar">
+                <div class="scrollbar-inner">
+                    <div class="user">
+                        @{
+                            var cuuser = new BrokerNetwork.Models.Model.AppUser(User as System.Security.Claims.ClaimsPrincipal);
+                            var userName = string.Empty;
+                            if (cuuser != null)
+                            {
+                                userName = cuuser.Name;
+                                <div class="user__info">
+                                    @if (!string.IsNullOrEmpty(cuuser.ProfileImage))
+                                    {
+                                        <img onerror='this.src = "/img/default.jpg"' src="~/Uploads/PersonalImages/@cuuser.ProfileImage" class="user__img" />
+                                    }
+                                    else
+                                    {
+                                        <img onerror='this.src = "/img/default.jpg"' src="~/img/person.png" class="user__img" />
+                                    }
+                                    <div class="user__info_text">
+                                        <div class="user__name">@userName</div>
+                                        <div class="user__email"></div>
+
+                                    </div>
+                                    <div class="actions">
+                                        <div class="dropdown actions__item">
+                                            <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                                            <div class="dropdown-menu user-dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Profile">صفحتى</a>
+                                                <a class="dropdown-item" href="/ChangePassword">تغيير كلمة المرور </a>
+                                                <a class="dropdown-item" href="/Logout">تسجيل الخروج</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <ul id="ulVerticalMenu" class="navigation">
+                        <li class="ulVerticalMenuli navigation__active"><a href="/Home/Landing"><i class="zmdi zmdi-home"></i> الرئيسية</a></li>
+                        <li class="ulVerticalMenuli"><a href="/Companies"><i class="zmdi zmdi-check-all"></i>شركاتى </a></li>
+                        <li class="ulVerticalMenuli"><a href="/Projects"><i class="zmdi zmdi-check-all"></i>مشاريعى </a></li>
+                        <li class="ulVerticalMenuli"><a href="/MyProperties"><i class="zmdi zmdi-check-all"></i> وحداتى</a></li>
+                        <li class="ulVerticalMenuli"><a href="/MyProperties/Create"><i class="zmdi zmdi-check-all"></i> إضافه وحدة</a></li>
+                        <li class="ulVerticalMenuli"><a href="/PropertyRequests"><i class="zmdi zmdi-check-all"></i> طلباتى</a></li>
+                        <li class="ulVerticalMenuli"><a href="/PropertyRequests/Create"><i class="zmdi zmdi-check-all"></i> إضافه طلب</a></li>
+                        <li class="ulVerticalMenuli"><a href="/VerficationRequests"><i class="zmdi zmdi-check-all"></i>طلبات توثيق شركاتى</a></li>
+                        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                        {
+                            <li class="ulVerticalMenuli"><a href="/SpecialOffers"><i class="zmdi zmdi-check-all"></i>العروض الخاصة</a></li>
+                            <li class="ulVerticalMenuli"><a href="/Locations"><i class="zmdi zmdi-check-all"></i> المناطق</a></li>
+                            <li class="ulVerticalMenuli"><a href="/Companies/ApproveCompanies"><i class="zmdi zmdi-check-all"></i>تفعيل الشركات</a></li>
+                            <li class="ulVerticalMenuli"><a href="/VerficationRequests/AdminVerificationCompanies"><i class="zmdi zmdi-check-all"></i>مراجعة توثيق الشركات</a></li>
+
+                        }
+                    </ul>
+                </div>
+            </aside>
+                            }
+                            @*<aside class="sidebar LiftSidebar"></aside>*@
+                            <section class="content">
+                                <div>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div id="divMenuTabs">
+                                            <div id="divTab" class="user-sections">
+                                                <div id="divForSale" class="user-section-item">@Html.ActionLink("المعروض", "Landing", "Home") </div>
+                                                <div id="divRequests" relPages="RequestDetails" class="user-section-item">@Html.ActionLink("الطلبات", "RequestsList", "Home")</div>
+                                                <div id="divMyList" class="user-section-item">@Html.ActionLink("قائمتى", "Index", "MyProperties")</div>
+                                                <div id="divBrokers" relPages="BrokerDetails" class="user-section-item">@Html.ActionLink("الوسطاء", "BrokersList", "Home")</div>
+                                            </div>
+                                            <div id="divSubTabForSale" class="sub-tab HideElement">
+                                                <div id="divSubTabForSaleBrokers" relPages="PropertyDetails" class="user-section-subitem">@Html.ActionLink("الأفراد", "Landing", "Home")</div>
+                                                <div id="divSubTabForSaleCompanies" relPages="CompanyDetails,ProjectDetails" class="user-section-subitem">@Html.ActionLink("الشركات", "CompaniesList", "Home") </div>
+                                                <div id="divSubTabForSpecialOfferView" relPages="CompanyDetails,ProjectDetails" class="user-section-subitem">@Html.ActionLink("العروض الخاصة", "SpecialOfferView", "Home") </div>
+
+
+                                            </div>
+                                            <div id="divSubTabMyList" class="sub-tab HideElement">
+                                                <div id="divSubTabMyListForSale" class="user-section-subitem">@Html.ActionLink("وحداتى", "Index", "MyProperties") </div>
+                                                <div id="divSubTabMyListRequests" class="user-section-subitem">@Html.ActionLink("طلباتى", "Index", "PropertyRequests")</div>
+                                                <div id="divSubTabMyListMyCompanies" class="user-section-subitem">@Html.ActionLink("شركاتى", "Index", "Companies")</div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                @RenderBody()
+                            </section>
+
+                            <hr class="body-hr" />
+
+                            @*@Scripts.Render("~/bundles/jquery")*@
+                            @*@Scripts.Render("~/bundles/bootstrap")*@
+                            <footer class="footer">
+                                <div class="footer-right">
+                                    <p> <span class="en-number">@DateTime.Now.Year</span> - جميع الحقوق &copy; محفوظة لدى LinkedBrokers </p>
+                                </div>
+                                <div class="footer-left">
+                                    <p><span class="">للشكاوى والمقترحات > <a href="mailto:info@linkedbrokers.com">info@linkedbrokers.com</a></span></p>
+                                </div>
+                            </footer>
+                            <div class="clearfix"></div>
+                        </main>
+                        <!-- Javascript -->
+                        <!-- Vendors -->
+                        <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+                        <script src="/vendors/bower_components/tether/dist/js/tether.min.js"></script>
+                        <script src="/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+                        <script src="/vendors/bower_components/Waves/dist/waves.min.js"></script>
+                        <script src="/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+                        <script src="/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+                        <script src="/vendors/bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+                        <script src="/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+                        <script src="/vendors/bower_components/dropzone/dist/min/dropzone.min.js"></script>
+                        <script src="/vendors/bower_components/moment/min/moment.min.js"></script>
+                        <script src="/vendors/bower_components/flatpickr/dist/flatpickr.min.js"></script>
+                        <script src="/vendors/bower_components/nouislider/distribute/nouislider.min.js"></script>
+                        <script src="/vendors/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+                        <script src="/vendors/bower_components/trumbowyg/dist/trumbowyg.min.js"></script>
+                        <script src="~/Scripts/UI-Scripts.js"></script>
+
+                        @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+                            <script src="~/Scripts/jquery.validate.min.js"></script>
+                            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+                        <!-- App functions and actions -->
+                        <script src="/js/app.min.js"></script>
+
+                        @Scripts.Render("~/angularcp")
+                        <script src="~/Scripts/kendo.all.min.js"></script>
+
+                        <script src="~/app/appcp.js"></script>
+                        <script src="~/Scripts/siteScript.js?v=2"></script>
+                        <script src="~/Scripts/search.js"></script>
+                        <script src="~/Scripts/locations.js"></script>
+                        <script type="text/javascript">
+                            $(document).on('submit', 'form', function () {
+                                var buttons = $(this).find('[type="submit"]');
+                                if ($(this).valid()) {
+                                    buttons.each(function (btn) {
+                                        $(buttons[btn]).prop('disabled', true);
+                                    });
+                                } else {
+                                    buttons.each(function (btn) {
+                                        $(buttons[btn]).prop('disabled', false);
+                                    });
+                                }
+                            });
+                        </script>
+
+                        @RenderSection("scripts", false)
+                    </body>
+                </html>

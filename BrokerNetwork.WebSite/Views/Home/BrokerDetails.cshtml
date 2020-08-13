@@ -1,0 +1,64 @@
+﻿@model BrokerNetwork.Models.User
+
+@{
+    /**/
+
+    ViewBag.Title = " الصفحة الشخصية " + @Model.FullName;
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title"> الصفحة الشخصية </h1>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-sm-3">
+                @if (!string.IsNullOrEmpty(Model.ProfileImgPath))
+                {
+                    <img class="img-thumbnail" src="~/Uploads/PersonalImages/@Model.ProfileImgPath" />
+                }
+                else
+                {
+                    <img class="img-thumbnail" src="~/img/person.png" />
+                }
+            </div>
+            <div class="col-sm-6">
+                <h4 style="margin-top: 0px !important;">@Model.FullName</h4>
+                البريد الالكترونى :   <span class="en-number">  @Model.Email </span> <br />
+                تاريخ الانضمام :     <span class="en-number">@Model.EntryDate.ToShortDateString()</span> <br />
+                الموبايل :    <span class="en-number"> @Model.Mobile</span>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    var filter = (BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>)ViewBag.BrokerProperties;
+    if (filter.Data.Count > 0)
+    {
+        <div id="divMatchedPropsOfRequest" class="card">
+            <div class="card-header">
+                <h1 class="card-title">وحدات الوسيط </h1>
+            </div>
+            <div class="clearfix"></div>
+            <div class="card-block">
+                @Html.Partial("_PropertiesView", filter)
+            </div>
+        </div>
+    }
+}
+@{
+    var filter2 = (BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>)ViewBag.BrokerRequests;
+    if (filter.Data.Count > 0)
+    {
+        <div id="divMatchedPropsOfRequest" class="card">
+            <div class="card-header">
+                <h1 class="card-title">طلبات الوسيط </h1>
+            </div>
+            <div class="clearfix"></div>
+            <div class="card-block">
+
+                @Html.Partial("_PropertiesView", filter2)
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,46 @@
+﻿@model BrokerNetwork.Models.Model.CommentModel
+@{
+    var CurrentUser = new BrokerNetwork.Models.Model.AppUser(User as System.Security.Claims.ClaimsPrincipal);
+}
+<br />
+<h2 class="simple-title">التعليقات</h2>
+<div class="comments-box">
+    <input type="hidden" id="CommentPostID" value="@Model.PostID" />
+    <input type="hidden" id="CommentPostType" value="@((int)Model.PostType)" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="comment-control">
+            <div class="comment-item-right">
+                <img src="@(!string.IsNullOrEmpty(CurrentUser.ProfileImage) ? "/Uploads/PersonalImages/" + CurrentUser.ProfileImage : "/img/person.png")" />
+            </div>
+            <div class="comment-item-left">
+                <textarea id="txtCommentMsg" cols="5" placeholder="اكتب تعليقك..." class="form-control"></textarea>
+                <span class="comment-counter">200</span> 
+                <button id="btnAddComment" class="btn btn-default">إضافة</button>
+            </div>
+        </div>
+    }
+    <div class="clearfix"></div>
+    <!--comments repeater-->
+    <div id="comments-box">
+        @foreach (var item in Model.Comments)
+        {
+            <div class="comment-item">
+                <div class="comment-item-right">
+                    <img src="@(!string.IsNullOrEmpty(item.UserImg) ? "/Uploads/PersonalImages/" + item.UserImg : "/img/person.png")" />
+                </div>
+                <div class="comment-item-left">
+                    <h4>
+                        <a href="/BrokerDetails/@item.UserID">@item.UserName</a>
+                        <br />
+                        <label class="comment-date"><span class="en-number"> @item.CreatedDate.ToString("dd/MM/yyyy hh:mm")</span></label>
+                        <br />
+                        <label>@item.CommentMsg</label>
+                    </h4>
+                </div>
+            </div>
+        }
+
+        <div class="@(Model.Comments.Count <= 0 ? "no-comments" : "HideElement")">لا يوجد تعليقات</div>
+    </div>
+</div>

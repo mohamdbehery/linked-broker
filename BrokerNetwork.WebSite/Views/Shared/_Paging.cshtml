@@ -1,0 +1,11 @@
+﻿@model BrokerNetwork.Models.Model.Paging
+
+@if (Model.ShowPagingButtons && Model.PagesCount > 1)
+{
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.PagesCount; i++)
+        {
+            <li @(Model.PageNum == i ? "class=active" : "")><a href="?PageNum=@i&PageSize=@Model.PageSize">@i</a></li>
+        }
+    </ul>
+}

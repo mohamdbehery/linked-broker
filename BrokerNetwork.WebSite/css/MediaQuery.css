@@ -1,0 +1,24 @@
+﻿
+    /* smart phone */
+@media (max-width:767px) {
+
+}
+
+    /* small screen */
+@media (min-width:768px) and (max-width:991px) {
+
+
+}
+
+    /* medium screen */
+@media (min-width:992px) and (max-width:1199px) {
+
+
+}
+
+    /* large screen */
+@media (min-width:1200px){
+    .content:not(.content--boxed):not(.content--full) {
+        padding: 102px 270px 0 270px
+    }
+}

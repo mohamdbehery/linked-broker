@@ -1,0 +1,103 @@
+﻿@model IEnumerable<BrokerNetwork.Models.PropertyRequest>
+
+@{
+    ViewBag.Title = "طلباتى";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+
+        <div class="actions">
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a onclick="Refresh()" class="dropdown-item">تحديث</a>
+                    @Html.ActionLink("إضافة طلب", "Create", null, new { @class = "dropdown-item" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table id="data-table" class="table table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th>
+                            تاريخ الاضافة
+                        </th>
+                        <th>
+                            عنوان الطلب
+                        </th>
+                        <th>
+                            المكان
+                        </th>
+                        <th>
+                            النوع
+                        </th>
+                        <th>
+                            الغرض
+                        </th>
+                        <th>
+                            الطابق
+                        </th>
+                        <th>
+                            الخيارات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th class="en-number">
+                                @item.EntryDate.ToShortDateString()
+                            </th>
+                            <th>
+                                @item.Title
+                            </th>
+                            <td>
+                                @if (item.Location != null)
+                                {
+                                    @item.Location.LocationName
+                                }
+                                else
+                                {
+                                    <span>غير محدد</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.PropertyType != null)
+                                {
+                                    @item.PropertyType.PropTypeTitle
+                                }
+                                else
+                                {
+                                    <span>غير محدد</span>
+                                }
+                            </td>
+                            <td>
+                                @item.PropertyPurpose.PropPurposeTitle
+                            </td>
+                            <td>
+                                @if (item.PropertyFloorType != null)
+                                {
+                                    @item.PropertyFloorType.FloorTypeTitle
+                                }
+                                else
+                                {
+                                    <span>غير محدد</span>
+                                }
+                            </td>
+                            <td class="Actions">
+                                <a href="@Url.Action("Edit", new { id = item.RequestID })" title="تعديل"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a>
+                                <a onclick="ShowModal('PropertyRequests/Delete/@item.RequestID')" title="حذف"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a>
+                                <a href="@Url.Action("RequestDetails","Home", new { id = item.RequestID })" title="وحدات متطابقة">وحدات متطابقة</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

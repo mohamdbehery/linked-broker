@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "تحكم الشركات";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.Title</h3>
+        <div class="actions">
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a onclick="Refresh()" class="dropdown-item">تحديث</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table id="data-table" class="table table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th>
+                            الشركة
+                        </th>
+                        <th>
+                            مؤسس الشركة
+                        </th>
+                        <th>
+                            الموبايل
+                        </th>
+                        <th>
+                            العنوان
+                        </th>
+                        <th>
+                            الخيارات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <th>
+                                شركة العقارات
+                            </th>
+                            <td>
+                                ميدو الهوارى
+                            </td>
+                            <td>
+                                01212545445
+                            </td>
+                            <td>
+                                التجمع - البنفسج
+                            </td>
+                            <td class="Actions">
+                                <a onclick="ShowModal('Action URL')" title="تفعيل"><i class="glyphicon glyphicon-ok"></i></a>&nbsp;&nbsp;
+                                <a href="#" title="تحميل ملفات التوثيق"><i class="glyphicon glyphicon-download"></i></a>&nbsp;&nbsp;
+                                <a onclick="ShowModal('Action URL')" title="توثيق"><i class="glyphicon glyphicon-time"></i></a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

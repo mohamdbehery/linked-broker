@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BrokerNetwork.Models.PropertyFloorType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FloorTypeTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ByUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FloorTypeTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ByUserID)
+        </td>
+        <td class="en-number">
+            @Html.DisplayFor(modelItem => item.EntryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PropertyFloorTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PropertyFloorTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PropertyFloorTypeID })
+            <a onclick="ShowModal('PropertyFloorTypes/Delete/@item.PropertyFloorTypeID')" title="حذف"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a>
+        </td>
+    </tr>
+}
+
+</table>

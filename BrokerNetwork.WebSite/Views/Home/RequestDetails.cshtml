@@ -1,0 +1,61 @@
+﻿@model BrokerNetwork.Models.Model.RequestDisplay
+
+@{
+    ViewBag.Title = string.IsNullOrEmpty(Model.Title) ? "تفاصيل الطلب" : Model.Title;
+}
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+    </div>
+    <div class="card-block">
+        <div class="prop-details-view">
+            <h3 class="sub-title1 full-width">@Model.PropTypeTitle @Model.OwnerShipTitle @Model.PropPurposeTitle</h3>
+            <h4 class="sub-title2 full-width">@Model.AddressDetails @Model.LocationName</h4>
+            <div class="row desc1">
+                <label class="col-md-6 col-sm-12">تاريخ الاضافة : <span class="text-right en-number">@Model.EntryDate.ToShortDateString()</span></label>
+                <label class="col-md-6 col-sm-12">المساحة: <span class="text-right en-number"> @Model.MinArea - @Model.MaxArea </span> متر</label>
+            </div>
+            <div class="row desc1">
+                <label class="col-md-6 col-sm-12">السعر: <span class="text-right en-number"> @Model.MinPrice - @Model.MaxPrice </span> جنيه</label>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Comments))
+            {
+                <div class="desc2">
+                    @Model.Comments
+                </div>
+            }
+            @if (Model.UserID > 0 && !string.IsNullOrEmpty(Model.FullName))
+            {
+                <div class="desc3">
+                    <a href="/BrokerDetails/@Model.UserID">@Model.FullName</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+@{
+    var filter = new BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>();
+    filter.Data = Model.MatchedProperties;
+    filter.ShowPagingButtons = false;
+    if (filter.Data.Count > 0)
+    {
+        <div id="divMatchedPropsOfRequest" class="card">
+            <div class="card-header">
+                <h1 class="card-title">وحدات متطابقة (<span class="en-number"> @Model.MatchedProperties.Count</span> وحدة)</h1>
+            </div>
+            <div class="clearfix"></div>
+            <div class="card-block">
+                @Html.Partial("_PropertiesView", filter)
+            </div>
+        </div>
+    }
+}
+
+@{
+   var commentsModel = new CommentModel();
+   commentsModel.Comments = Model.PostComments;
+   commentsModel.PostID = Model.PropertyID;
+   commentsModel.PostType = CommentsPostTypes.PropertyRequest;
+}
+@Html.Partial("_Comments", commentsModel)

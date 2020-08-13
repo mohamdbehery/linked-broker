@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BrokerNetwork.Models.Project>
+
+@{
+    ViewBag.Title = "مشاريعى";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.Title</h3>
+        <div class="actions">
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    @Html.ActionLink("اضافة مشروع", "Create", null, new { @class = "dropdown-item" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table id="data-table" class="table table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th>
+                            الشركة
+                        </th>
+                        <th>
+                            المشروع
+                        </th>
+                        <th>
+                            العنوان
+                        </th>
+                        <th>
+                            عدد الوحدات
+                        </th>
+                        <th>
+                            حالة المشروع
+                        </th>
+                        <th>
+                            الخيارات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <th>
+                            @item.Company.CompanyName
+                        </th>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.ProjectName)*@
+                            <a href="@Url.Action("Index", "MyProperties", new { id = item.ProjectID })" title="@item.ProjectName">@item.ProjectName</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AddressDetails)
+                        </td>
+                        <td class="en-number">
+                            @Html.DisplayFor(modelItem => item.NoOfUnits)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProjectStatu.StatusTitle)
+                        </td>
+                        <td class="Actions">
+                            <a href="@Url.Action("Edit", "Projects", new { id = item.ProjectID })" title="تعديل"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a>
+                            <a onclick="ShowModal('Projects/Delete/@item.ProjectID')" title="حذف"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

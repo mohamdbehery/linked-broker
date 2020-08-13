@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "تأكيد البريد الالكترونى";
+    var success = (bool)ViewBag.Success;
+}
+
+<p class="text-center">@ViewBag.Conf</p>
+@if (success)
+{
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a href="Login" class="btn custom-btn2">تسجيل الدخول</a>
+        </div>
+    </div>
+}
+

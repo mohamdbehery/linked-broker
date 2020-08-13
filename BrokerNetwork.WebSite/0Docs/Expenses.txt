@@ -1,0 +1,7 @@
+IN (10,000 + 3,000 + 2,000 + 5,000)
+
+OUT
+Osama 5,450    4767+4200 = 8967 >> Remains > 3517
+Behery 6,085  4767+2800 = 7567 >> Remains > 1482
+
+1,915 expenses + Sayed 1,500  + Osama 50 Cafe last meeting

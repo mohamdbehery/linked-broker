@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BrokerNetwork.Models.SpecialOffer>
+@{
+    ViewBag.Title = "العروض الخاصة";
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.Title</h3>
+    </div>
+    <div class="card-block ">
+        @foreach (var item in Model)
+        {
+            <div class="item-full-screen">
+                <div class="row hori-rpt">
+                    @if (!string.IsNullOrEmpty(item.ImgPath))
+                    {
+                        <img class="full-img" src="~/Uploads/SpecialOffers/@item.ImgPath" />
+                    }
+                    else
+                    {
+                        <img class="" src="~/img/default.jpg" />
+                    }
+                </div>
+                <div class="row">
+                    <h4 class="full-width">
+                        @item.OfferTitle
+                    </h4>
+                    تاريخ الاعلان: &nbsp;<span class="en-number"> @string.Format("{0: d/M/yyyy}", item.EntryDate)</span>
+                    
+                    <div class="desc2" style="width: 100%;padding-top: 10px;">
+                        @Html.DisplayFor(modelItem => item.OfferDesc)
+                    </div>
+                </div>
+                <hr class="repeated-hr" />
+            </div>
+        }
+
+
+    </div>
+</div>
+

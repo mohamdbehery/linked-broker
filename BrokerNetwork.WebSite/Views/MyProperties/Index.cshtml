@@ -1,0 +1,89 @@
+﻿@model BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>
+
+@{
+    ViewBag.Title = "وحداتى";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+
+        <div class="actions">
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a onclick="Refresh()" class="dropdown-item">تحديث</a>
+                    @Html.ActionLink("إضافة وحدة", "Create", null, new { @class = "dropdown-item" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table id="data-table" class="table table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th>
+                            تاريخ الاضافة / التعديل
+                        </th>
+                        <th>
+                            عنوان الاعلان
+                        </th>
+                        <th>
+                            المكان
+                        </th>
+                        <th>
+                            الملكية
+                        </th>
+                        <th>
+                            النوع
+                        </th>
+                        <th>
+                            السعر
+                        </th>
+                        <th>
+                            عدد الغرف
+                        </th>
+                        <th>
+                            الخيارات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <th class="en-number">
+                                @item.EntryDate.ToShortDateString()
+                            </th>
+                            <td>
+                                <a href="/PropertyDetails/@item.PropertyID">
+                                    @item.Title
+                                </a>
+                            </td>
+                            <td>
+                                @item.LocationName
+                            </td>
+                            <td>
+                                @item.OwnerShipTitle
+                            </td>
+                            <td>
+                                @item.PropTypeTitle
+                            </td>
+                            <td class="en-number">
+                                @item.Price
+                            </td>
+                            <td class="en-number">
+                                @item.NumberOfRooms
+                            </td>
+                            <td class="Actions">
+                                <a href="@Url.Action("Edit", new { id = item.PropertyID })" title="تعديل"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></a>
+                                <a onclick="ShowModal('MyProperties/Delete/@item.PropertyID')" title="حذف"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

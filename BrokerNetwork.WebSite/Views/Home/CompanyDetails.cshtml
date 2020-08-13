@@ -1,0 +1,53 @@
+﻿@model BrokerNetwork.Models.Company
+@{
+    ViewBag.Title = Model.CompanyName;
+}
+
+<div class="card">
+    <div class="card-header header-without-margin">
+        <h1 class="card-title">مشاريع الشركة (@Model.CompanyName)</h1>
+        <img onerror='this.src = "/img/default.jpg"' class="title-img" src="~/Uploads/CompanyProfile/@Model.ImgPath" />
+    </div>
+    <div class="card-block">
+        @if (!string.IsNullOrEmpty(@Model.Contacts))
+        {
+            <div>
+                &nbsp; اتصل بنا على : <span class="en-number">@Model.Contacts</span>
+            </div>
+            <br />
+        }
+        <br />
+        @foreach (var item in Model.Projects)
+        {
+            var images = (List<BrokerNetwork.Models.File>)ViewBag.Images;
+            BrokerNetwork.Models.File fImage = null;
+            if (images != null && images.Count > 0)
+            {
+                fImage = images.Where(x => x.ParentID == item.ProjectID).FirstOrDefault();
+            }
+            <div class="row hori-rpt">
+                <div class="col-md-3">
+                    <a href="/ProjectDetails/@item.ProjectID">
+                        @if (fImage != null)
+                        {
+                            <img onerror='this.src = "/img/default.jpg"' class="img-thumbnail" src="~/Uploads/Projects/@fImage.FileName" />
+                        }
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <h3>
+                        <a href="/ProjectDetails/@item.ProjectID">
+                            @item.ProjectName
+                        </a>
+                    </h3>
+                    تاريخ الاضافة: &nbsp;
+                    @item.EntryDate.ToShortDateString()
+                    <br />
+                    العنوان:&nbsp;
+                    @item.Location.LocationName , @item.AddressDetails
+                </div>
+            </div>
+            <hr class="repeated-hr" />
+        }
+    </div>
+</div>

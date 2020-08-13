@@ -1,0 +1,86 @@
+﻿@model BrokerNetwork.Models.VerficationRequest
+
+@{
+    ViewBag.Title = "طلب توثيق";
+    var images = ViewBag.Images as List<BrokerNetwork.Models.File>;
+
+}
+
+@using (Html.BeginForm("AdminVerifyCompany", "VerficationRequests", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+        <div class="card-block">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.VerficationID)
+
+            <div class="row">
+                <div class="col-sm-12">
+                    الشركة (<b>@Model.Company.CompanyName</b>)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    رسالة مرفقة <br />
+                    <div class="bg-gay">
+                        @Model.RequestContent
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <label class="inline-label for-ddl">
+                            حالة التوثيق
+                        </label>
+                        <div class="form-group">
+                            @Html.DropDownList("VerfiedStatusID", ViewBag.VerificationStatusTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.VerfiedStatusID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    تعليق إدارة الموقع
+                    <div class="input-group">
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.AdminMessage, new { @class = "form-control Custom-textarea" })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.AdminMessage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (images != null)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">الصور المرفقة</div>
+                <div class="panel-body">
+                    <div class="row">
+                        @foreach (var img in images)
+                        {
+                            <div class="thumbnail">
+                                <img onclick="MaximizaImage(this.src)" src="~/Uploads/Verfication/@img.FileName" class="img-thumbnail small-images clickable" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 text-center">
+                <input type="submit" value="حفظ" class="btn btn-primary custom-btn-search" />
+            </div>
+        </div>
+    </div>
+}

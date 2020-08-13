@@ -1,0 +1,111 @@
+﻿@model BrokerNetwork.Models.VerficationRequest
+
+@{
+    ViewBag.Title = "طلب توثيق";
+    var images = ViewBag.Images as List<BrokerNetwork.Models.File>;
+
+}
+
+@using (Html.BeginForm("VerficationRequest", "VerficationRequests", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+        <div class="card-block">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.VerficationID)
+            <div class="row">
+                <div class="col-sm-12">
+                    رسالة مرفقة
+                    <div class="input-group">
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.RequestContent, new { @class = "form-control Custom-textarea" })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.RequestContent, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    الشركة
+                    <div class="input-group">
+                        <div class="form-group">
+                            @Html.DropDownList("CompanyID", ViewBag.Companies as SelectList, htmlAttributes: new { @class = "form-control" })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                @if (Model != null && Model.VerficationStatu != null)
+                {
+                <div class="col-sm-6">
+                    <div class="just-text">
+                        حالة الطلب (<b>@Model.VerficationStatu.VerfiedStatusTitle</b>)
+                    </div>
+                </div>
+                }
+            </div>
+            @if (Model != null && !string.IsNullOrEmpty(Model.AdminMessage))
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        تعليق إدارة الموقع
+                        <div class="input-group">
+                            @Model.AdminMessage
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model == null || Model.VerfiedStatusID == null || Model.VerfiedStatusID != 2)
+            {
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.Label("الصور", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="input-group col-md-10">
+                            <div class="form-group">
+                                <label class="custom-file-upload">
+                                    <input type="file" name="files" accept="*/images" multiple />
+                                    <i class="zmdi zmdi-plus zmdi-hc-fw"></i>
+                                    رفع الصور
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (images != null)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">الصور المرفقة</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            @foreach (var img in images)
+                            {
+                                <div class="thumbnail">
+                                    <img onclick="MaximizaImage(this.src)" src="~/Uploads/Verfication/@img.FileName" class="img-thumbnail small-images clickable" />
+                                    @if (Model == null || Model.VerfiedStatusID == null || Model.VerfiedStatusID != 2)
+                                    {
+                                        <a href="@Url.Action("DeleteImage", "VerficationRequests", new { subID = img.ParentID, imgID = img.FileID })">&times;</a>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model == null || Model.VerfiedStatusID == null || Model.VerfiedStatusID != 2)
+            {
+                <div class="form-group">
+                    <div class="col-md-offset-2 text-center">
+                        <input type="submit" value="إرسال" class="btn btn-primary custom-btn-search" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

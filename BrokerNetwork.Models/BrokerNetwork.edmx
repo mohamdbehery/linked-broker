@@ -1,0 +1,2985 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BrokerNetworkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="PostID" Type="bigint" />
+          <Property Name="PostType" Type="int" />
+          <Property Name="CommentMsg" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CompanyDesc" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CompanyVerificationTypeID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="CompanyTypeID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contacts" Type="nvarchar" MaxLength="250" />
+          <Property Name="ImgPath" Type="nvarchar" MaxLength="250" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ContactsForBrokers" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="CompanyBrokers">
+          <Key>
+            <PropertyRef Name="CompanyBrokerID" />
+          </Key>
+          <Property Name="CompanyBrokerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyTypes">
+          <Key>
+            <PropertyRef Name="CompanyTypeID" />
+          </Key>
+          <Property Name="CompanyTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyTypeTitle" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CompanyVerificationTypes">
+          <Key>
+            <PropertyRef Name="CompanyVerificationTypeID" />
+          </Key>
+          <Property Name="CompanyVerificationTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VerificationTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ByUserID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CusomerPreviews">
+          <Key>
+            <PropertyRef Name="CustomerPreviewID" />
+          </Key>
+          <Property Name="CustomerPreviewID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyID" Type="bigint" Nullable="false" />
+          <Property Name="CustomerID" Type="bigint" Nullable="false" />
+          <Property Name="PreviewDate" Type="datetime" Nullable="false" />
+          <Property Name="PreviewTime" Type="time" Precision="7" />
+          <Property Name="PreviewStatusID" Type="int" Nullable="false" />
+          <Property Name="NoOfProperties" Type="int" Nullable="false" />
+          <Property Name="ShawAlertBeforeMinutes" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer_CustomerStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="bigint" Nullable="false" />
+          <Property Name="CustomerStatusID" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="CustomerStatusID" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerStatus">
+          <Key>
+            <PropertyRef Name="CustomerStatusID" />
+          </Key>
+          <Property Name="CustomerStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerStatusTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="bigint" Nullable="false" />
+          <Property Name="ParentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileType" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrginalFileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FilesLines">
+          <Key>
+            <PropertyRef Name="FilesLineID" />
+          </Key>
+          <Property Name="FilesLineID" Type="bigint" Nullable="false" />
+          <Property Name="ParentID" Type="bigint" />
+          <Property Name="ParentTypeID" Type="char" MaxLength="2" />
+          <Property Name="Path" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="LocationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OwnerShipTypes">
+          <Key>
+            <PropertyRef Name="OwnerShipTypeID" />
+          </Key>
+          <Property Name="OwnerShipTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerShipTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permission_PermissionGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionGroupID" Type="int" Nullable="false" />
+          <Property Name="UserPermissionID" Type="int" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermissionGroups">
+          <Key>
+            <PropertyRef Name="PermissionGroupID" />
+          </Key>
+          <Property Name="PermissionGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreviewStatus">
+          <Key>
+            <PropertyRef Name="PreviewStatusID" />
+          </Key>
+          <Property Name="PreviewStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTypeID" Type="int" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="AddressDetails" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="NoOfUnits" Type="int" />
+          <Property Name="ProjectStatusID" Type="int" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectStatus">
+          <Key>
+            <PropertyRef Name="ProjectStatusID" />
+          </Key>
+          <Property Name="ProjectStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectTypes">
+          <Key>
+            <PropertyRef Name="ProjectTypeID" />
+          </Key>
+          <Property Name="ProjectTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="AddressDetails" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ProjectID" Type="int" />
+          <Property Name="IsUnit" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="CanInstallment" Type="bit" Nullable="false" />
+          <Property Name="NoOfYears" Type="int" />
+          <Property Name="DownPayment" Type="decimal" Precision="9" Scale="0" />
+          <Property Name="FloorNum" Type="int" Nullable="false" />
+          <Property Name="PropertyFloorTypeID" Type="int" Nullable="false" />
+          <Property Name="NoOfProperties" Type="int" Nullable="false" />
+          <Property Name="Area" Type="int" Nullable="false" />
+          <Property Name="OwnerShipTypeID" Type="int" Nullable="false" />
+          <Property Name="PropertyTypeID" Type="int" Nullable="false" />
+          <Property Name="PropertyPurposeID" Type="int" Nullable="false" />
+          <Property Name="HasElevator" Type="bit" Nullable="false" />
+          <Property Name="HasGarage" Type="bit" Nullable="false" />
+          <Property Name="AllowVisitors" Type="bit" Nullable="false" />
+          <Property Name="Commission" Type="float" />
+          <Property Name="CommissionType" Type="int" />
+          <Property Name="NumberOfRooms" Type="int" Nullable="false" />
+          <Property Name="NumberOfBathrooms" Type="int" Nullable="false" />
+          <Property Name="ReadyDate" Type="date" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="SharedID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyFloorTypes">
+          <Key>
+            <PropertyRef Name="PropertyFloorTypeID" />
+          </Key>
+          <Property Name="PropertyFloorTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorTypeTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyPictures">
+          <Key>
+            <PropertyRef Name="PropPictureID" />
+          </Key>
+          <Property Name="PropertyID" Type="bigint" Nullable="false" />
+          <Property Name="PropPictureID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PicturePath" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PropDesc" Type="nchar" MaxLength="10" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyPurpose">
+          <Key>
+            <PropertyRef Name="PropertyPurposeID" />
+          </Key>
+          <Property Name="PropertyPurposeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropPurposeTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyRequests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="GovID" Type="int" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="LocationIDs" Type="int" />
+          <Property Name="AddressDetails" Type="nvarchar" MaxLength="250" />
+          <Property Name="MinPrice" Type="decimal" Precision="9" Scale="0" />
+          <Property Name="MaxPrice" Type="decimal" Precision="9" Scale="0" />
+          <Property Name="CanInstallment" Type="bit" Nullable="false" />
+          <Property Name="NoOfYears" Type="int" />
+          <Property Name="PropertyFloorTypeID" Type="int" />
+          <Property Name="MinArea" Type="int" />
+          <Property Name="MaxArea" Type="int" />
+          <Property Name="OwnerShipTypeID" Type="int" />
+          <Property Name="PropertyTypeID" Type="int" />
+          <Property Name="PropertyPurposeID" Type="int" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyRequests_FollowUp">
+          <Key>
+            <PropertyRef Name="FollowUpID" />
+          </Key>
+          <Property Name="FollowUpID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestID" Type="bigint" Nullable="false" />
+          <Property Name="RequestStatusID" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyTypes">
+          <Key>
+            <PropertyRef Name="PropertyTypeID" />
+          </Key>
+          <Property Name="PropertyTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropTypeTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestStatus">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shared">
+          <Key>
+            <PropertyRef Name="ShareID" />
+          </Key>
+          <Property Name="ShareID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShareTitle" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SpecialOffers">
+          <Key>
+            <PropertyRef Name="OfferID" />
+          </Key>
+          <Property Name="OfferID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfferTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="OfferDesc" Type="nvarchar(max)" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="ImgPath" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" />
+          <Property Name="SortOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="PreviewID" Type="bigint" Nullable="false" />
+          <Property Name="TransactionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyID" Type="bigint" Nullable="false" />
+          <Property Name="CustomerID" Type="bigint" Nullable="false" />
+          <Property Name="PreviewDate" Type="date" Nullable="false" />
+          <Property Name="PreviewTime" Type="time" Precision="7" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="PreviewStatusID" Type="int" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_UserPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="UserPermissionID" Type="int" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGroups">
+          <Key>
+            <PropertyRef Name="UserGroupName" />
+          </Key>
+          <Property Name="UserGroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserGroupDesc" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserPermission">
+          <Key>
+            <PropertyRef Name="UserPermissionID" />
+          </Key>
+          <Property Name="UserPermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ByUserID" Type="bigint" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="UserGroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsVerfied" Type="bit" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="FavouriteLocationIDs" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="ProfileImgPath" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsConfirmed" Type="bit" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="ByUserID" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="Provider" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProviderID" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VerficationRequests">
+          <Key>
+            <PropertyRef Name="VerficationID" />
+          </Key>
+          <Property Name="VerficationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="RequestContent" Type="nvarchar(max)" />
+          <Property Name="VerfiedStatusID" Type="int" />
+          <Property Name="AdminMessage" Type="nvarchar(max)" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VerficationStatus">
+          <Key>
+            <PropertyRef Name="VerfiedStatusID" />
+          </Key>
+          <Property Name="VerfiedStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VerfiedStatusTitle" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Companies_CompanyTypes">
+          <End Role="CompanyTypes" Type="Self.CompanyTypes" Multiplicity="1" />
+          <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyTypes">
+              <PropertyRef Name="CompanyTypeID" />
+            </Principal>
+            <Dependent Role="Companies">
+              <PropertyRef Name="CompanyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Companies_CompanyVerificationTypes">
+          <End Role="CompanyVerificationTypes" Type="Self.CompanyVerificationTypes" Multiplicity="1" />
+          <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyVerificationTypes">
+              <PropertyRef Name="CompanyVerificationTypeID" />
+            </Principal>
+            <Dependent Role="Companies">
+              <PropertyRef Name="CompanyVerificationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBrokers_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="CompanyBrokers" Type="Self.CompanyBrokers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyBrokers">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBrokers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CompanyBrokers" Type="Self.CompanyBrokers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CompanyBrokers">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusomerPreviews_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="CusomerPreviews" Type="Self.CusomerPreviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CusomerPreviews">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusomerPreviews_PreviewStatus">
+          <End Role="PreviewStatus" Type="Self.PreviewStatus" Multiplicity="1" />
+          <End Role="CusomerPreviews" Type="Self.CusomerPreviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreviewStatus">
+              <PropertyRef Name="PreviewStatusID" />
+            </Principal>
+            <Dependent Role="CusomerPreviews">
+              <PropertyRef Name="PreviewStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_CustomerStatus_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Customer_CustomerStatus" Type="Self.Customer_CustomerStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_CustomerStatus">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_CustomerStatus_CustomerStatus">
+          <End Role="CustomerStatus" Type="Self.CustomerStatus" Multiplicity="1" />
+          <End Role="Customer_CustomerStatus" Type="Self.Customer_CustomerStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerStatus">
+              <PropertyRef Name="CustomerStatusID" />
+            </Principal>
+            <Dependent Role="Customer_CustomerStatus">
+              <PropertyRef Name="CustomerStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_CustomerStatus">
+          <End Role="CustomerStatus" Type="Self.CustomerStatus" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerStatus">
+              <PropertyRef Name="CustomerStatusID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CustomerStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="ByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_PermissionGroup_PermissionGroups">
+          <End Role="PermissionGroups" Type="Self.PermissionGroups" Multiplicity="1" />
+          <End Role="Permission_PermissionGroup" Type="Self.Permission_PermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionGroups">
+              <PropertyRef Name="PermissionGroupID" />
+            </Principal>
+            <Dependent Role="Permission_PermissionGroup">
+              <PropertyRef Name="PermissionGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_PermissionGroup_UserPermission">
+          <End Role="UserPermission" Type="Self.UserPermission" Multiplicity="1" />
+          <End Role="Permission_PermissionGroup" Type="Self.Permission_PermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserPermission">
+              <PropertyRef Name="UserPermissionID" />
+            </Principal>
+            <Dependent Role="Permission_PermissionGroup">
+              <PropertyRef Name="UserPermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_ProjectStatus">
+          <End Role="ProjectStatus" Type="Self.ProjectStatus" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectStatus">
+              <PropertyRef Name="ProjectStatusID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_ProjectTypes">
+          <End Role="ProjectTypes" Type="Self.ProjectTypes" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectTypes">
+              <PropertyRef Name="ProjectTypeID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_FloorTypes">
+          <End Role="PropertyFloorTypes" Type="Self.PropertyFloorTypes" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyFloorTypes">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_OwnerShips">
+          <End Role="OwnerShipTypes" Type="Self.OwnerShipTypes" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerShipTypes">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_PropertyTypes">
+          <End Role="PropertyTypes" Type="Self.PropertyTypes" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyTypes">
+              <PropertyRef Name="PropertyTypeID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="PropertyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_SectionTypes">
+          <End Role="PropertyPurpose" Type="Self.PropertyPurpose" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyPurpose">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Shared">
+          <End Role="Shared" Type="Self.Shared" Multiplicity="0..1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shared">
+              <PropertyRef Name="ShareID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="SharedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="ByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyPictures_Properties">
+          <End Role="Properties" Type="Self.Properties" Multiplicity="1" />
+          <End Role="PropertyPictures" Type="Self.PropertyPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="PropertyID" />
+            </Principal>
+            <Dependent Role="PropertyPictures">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_FollowUp_PropertyRequests">
+          <End Role="PropertyRequests" Type="Self.PropertyRequests" Multiplicity="1" />
+          <End Role="PropertyRequests_FollowUp" Type="Self.PropertyRequests_FollowUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyRequests">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="PropertyRequests_FollowUp">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_FollowUp_RequestStatus">
+          <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="1" />
+          <End Role="PropertyRequests_FollowUp" Type="Self.PropertyRequests_FollowUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatus">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="PropertyRequests_FollowUp">
+              <PropertyRef Name="RequestStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_FloorTypes">
+          <End Role="PropertyFloorTypes" Type="Self.PropertyFloorTypes" Multiplicity="0..1" />
+          <End Role="PropertyRequests" Type="Self.PropertyRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyFloorTypes">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Principal>
+            <Dependent Role="PropertyRequests">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="PropertyRequests" Type="Self.PropertyRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="PropertyRequests">
+              <PropertyRef Name="LocationIDs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_OwnerShips">
+          <End Role="OwnerShipTypes" Type="Self.OwnerShipTypes" Multiplicity="0..1" />
+          <End Role="PropertyRequests" Type="Self.PropertyRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerShipTypes">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Principal>
+            <Dependent Role="PropertyRequests">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_PropertyTypes">
+          <End Role="PropertyTypes" Type="Self.PropertyTypes" Multiplicity="0..1" />
+          <End Role="PropertyRequests" Type="Self.PropertyRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyTypes">
+              <PropertyRef Name="PropertyTypeID" />
+            </Principal>
+            <Dependent Role="PropertyRequests">
+              <PropertyRef Name="PropertyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_SectionTypes">
+          <End Role="PropertyPurpose" Type="Self.PropertyPurpose" Multiplicity="0..1" />
+          <End Role="PropertyRequests" Type="Self.PropertyRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyPurpose">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Principal>
+            <Dependent Role="PropertyRequests">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_CusomerPreviews">
+          <End Role="CusomerPreviews" Type="Self.CusomerPreviews" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CusomerPreviews">
+              <PropertyRef Name="CustomerPreviewID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="PreviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserPermission_UserPermission">
+          <End Role="UserPermission" Type="Self.UserPermission" Multiplicity="1" />
+          <End Role="User_UserPermission" Type="Self.User_UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserPermission">
+              <PropertyRef Name="UserPermissionID" />
+            </Principal>
+            <Dependent Role="User_UserPermission">
+              <PropertyRef Name="UserPermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserPermission_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_UserPermission" Type="Self.User_UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User_UserPermission">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserGroups">
+          <End Role="UserGroups" Type="Self.UserGroups" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroups">
+              <PropertyRef Name="UserGroupName" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserGroupName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerficationRequests_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="VerficationRequests" Type="Self.VerficationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="VerficationRequests">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerficationRequests_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="VerficationRequests" Type="Self.VerficationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="VerficationRequests">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerficationRequests_VerficationStatus">
+          <End Role="VerficationStatus" Type="Self.VerficationStatus" Multiplicity="0..1" />
+          <End Role="VerficationRequests" Type="Self.VerficationRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VerficationStatus">
+              <PropertyRef Name="VerfiedStatusID" />
+            </Principal>
+            <Dependent Role="VerficationRequests">
+              <PropertyRef Name="VerfiedStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BrokerNetworkModelStoreContainer">
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyBrokers" EntityType="Self.CompanyBrokers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyTypes" EntityType="Self.CompanyTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyVerificationTypes" EntityType="Self.CompanyVerificationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CusomerPreviews" EntityType="Self.CusomerPreviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_CustomerStatus" EntityType="Self.Customer_CustomerStatus" Schema="dbo" Table="Customer.CustomerStatus" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerStatus" EntityType="Self.CustomerStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilesLines" EntityType="Self.FilesLines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OwnerShipTypes" EntityType="Self.OwnerShipTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission_PermissionGroup" EntityType="Self.Permission_PermissionGroup" Schema="dbo" Table="Permission.PermissionGroup" store:Type="Tables" />
+          <EntitySet Name="PermissionGroups" EntityType="Self.PermissionGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreviewStatus" EntityType="Self.PreviewStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectStatus" EntityType="Self.ProjectStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectTypes" EntityType="Self.ProjectTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyFloorTypes" EntityType="Self.PropertyFloorTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyPictures" EntityType="Self.PropertyPictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyPurpose" EntityType="Self.PropertyPurpose" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyRequests" EntityType="Self.PropertyRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyRequests_FollowUp" EntityType="Self.PropertyRequests_FollowUp" Schema="dbo" Table="PropertyRequests.FollowUp" store:Type="Tables" />
+          <EntitySet Name="PropertyTypes" EntityType="Self.PropertyTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestStatus" EntityType="Self.RequestStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shared" EntityType="Self.Shared" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialOffers" EntityType="Self.SpecialOffers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_UserPermission" EntityType="Self.User_UserPermission" Schema="dbo" Table="User.UserPermission" store:Type="Tables" />
+          <EntitySet Name="UserGroups" EntityType="Self.UserGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPermission" EntityType="Self.UserPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VerficationRequests" EntityType="Self.VerficationRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VerficationStatus" EntityType="Self.VerficationStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Companies_CompanyTypes" Association="Self.FK_Companies_CompanyTypes">
+            <End Role="CompanyTypes" EntitySet="CompanyTypes" />
+            <End Role="Companies" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Companies_CompanyVerificationTypes" Association="Self.FK_Companies_CompanyVerificationTypes">
+            <End Role="CompanyVerificationTypes" EntitySet="CompanyVerificationTypes" />
+            <End Role="Companies" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBrokers_Companies" Association="Self.FK_CompanyBrokers_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="CompanyBrokers" EntitySet="CompanyBrokers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBrokers_Users" Association="Self.FK_CompanyBrokers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CompanyBrokers" EntitySet="CompanyBrokers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusomerPreviews_Customers" Association="Self.FK_CusomerPreviews_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CusomerPreviews" EntitySet="CusomerPreviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusomerPreviews_PreviewStatus" Association="Self.FK_CusomerPreviews_PreviewStatus">
+            <End Role="PreviewStatus" EntitySet="PreviewStatus" />
+            <End Role="CusomerPreviews" EntitySet="CusomerPreviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_CustomerStatus_Customers" Association="Self.FK_Customer_CustomerStatus_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Customer_CustomerStatus" EntitySet="Customer_CustomerStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_CustomerStatus_CustomerStatus" Association="Self.FK_Customer_CustomerStatus_CustomerStatus">
+            <End Role="CustomerStatus" EntitySet="CustomerStatus" />
+            <End Role="Customer_CustomerStatus" EntitySet="Customer_CustomerStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_CustomerStatus" Association="Self.FK_Customers_CustomerStatus">
+            <End Role="CustomerStatus" EntitySet="CustomerStatus" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Users" Association="Self.FK_Customers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_PermissionGroup_PermissionGroups" Association="Self.FK_Permission_PermissionGroup_PermissionGroups">
+            <End Role="PermissionGroups" EntitySet="PermissionGroups" />
+            <End Role="Permission_PermissionGroup" EntitySet="Permission_PermissionGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_PermissionGroup_UserPermission" Association="Self.FK_Permission_PermissionGroup_UserPermission">
+            <End Role="UserPermission" EntitySet="UserPermission" />
+            <End Role="Permission_PermissionGroup" EntitySet="Permission_PermissionGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Companies" Association="Self.FK_Projects_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Locations" Association="Self.FK_Projects_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_ProjectStatus" Association="Self.FK_Projects_ProjectStatus">
+            <End Role="ProjectStatus" EntitySet="ProjectStatus" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_ProjectTypes" Association="Self.FK_Projects_ProjectTypes">
+            <End Role="ProjectTypes" EntitySet="ProjectTypes" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_FloorTypes" Association="Self.FK_Properties_FloorTypes">
+            <End Role="PropertyFloorTypes" EntitySet="PropertyFloorTypes" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Locations" Association="Self.FK_Properties_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_OwnerShips" Association="Self.FK_Properties_OwnerShips">
+            <End Role="OwnerShipTypes" EntitySet="OwnerShipTypes" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Projects" Association="Self.FK_Properties_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_PropertyTypes" Association="Self.FK_Properties_PropertyTypes">
+            <End Role="PropertyTypes" EntitySet="PropertyTypes" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_SectionTypes" Association="Self.FK_Properties_SectionTypes">
+            <End Role="PropertyPurpose" EntitySet="PropertyPurpose" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Shared" Association="Self.FK_Properties_Shared">
+            <End Role="Shared" EntitySet="Shared" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Users" Association="Self.FK_Properties_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyPictures_Properties" Association="Self.FK_PropertyPictures_Properties">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="PropertyPictures" EntitySet="PropertyPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_FollowUp_PropertyRequests" Association="Self.FK_PropertyRequests_FollowUp_PropertyRequests">
+            <End Role="PropertyRequests" EntitySet="PropertyRequests" />
+            <End Role="PropertyRequests_FollowUp" EntitySet="PropertyRequests_FollowUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_FollowUp_RequestStatus" Association="Self.FK_PropertyRequests_FollowUp_RequestStatus">
+            <End Role="RequestStatus" EntitySet="RequestStatus" />
+            <End Role="PropertyRequests_FollowUp" EntitySet="PropertyRequests_FollowUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_FloorTypes" Association="Self.FK_PropertyRequests_FloorTypes">
+            <End Role="PropertyFloorTypes" EntitySet="PropertyFloorTypes" />
+            <End Role="PropertyRequests" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_Locations" Association="Self.FK_PropertyRequests_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="PropertyRequests" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_OwnerShips" Association="Self.FK_PropertyRequests_OwnerShips">
+            <End Role="OwnerShipTypes" EntitySet="OwnerShipTypes" />
+            <End Role="PropertyRequests" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_PropertyTypes" Association="Self.FK_PropertyRequests_PropertyTypes">
+            <End Role="PropertyTypes" EntitySet="PropertyTypes" />
+            <End Role="PropertyRequests" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_SectionTypes" Association="Self.FK_PropertyRequests_SectionTypes">
+            <End Role="PropertyPurpose" EntitySet="PropertyPurpose" />
+            <End Role="PropertyRequests" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_CusomerPreviews" Association="Self.FK_Transactions_CusomerPreviews">
+            <End Role="CusomerPreviews" EntitySet="CusomerPreviews" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Customers" Association="Self.FK_Transactions_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserPermission_UserPermission" Association="Self.FK_User_UserPermission_UserPermission">
+            <End Role="UserPermission" EntitySet="UserPermission" />
+            <End Role="User_UserPermission" EntitySet="User_UserPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserPermission_Users" Association="Self.FK_User_UserPermission_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_UserPermission" EntitySet="User_UserPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Companies" Association="Self.FK_Users_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserGroups" Association="Self.FK_Users_UserGroups">
+            <End Role="UserGroups" EntitySet="UserGroups" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerficationRequests_Companies" Association="Self.FK_VerficationRequests_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="VerficationRequests" EntitySet="VerficationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerficationRequests_Users" Association="Self.FK_VerficationRequests_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VerficationRequests" EntitySet="VerficationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerficationRequests_VerficationStatus" Association="Self.FK_VerficationRequests_VerficationStatus">
+            <End Role="VerficationStatus" EntitySet="VerficationStatus" />
+            <End Role="VerficationRequests" EntitySet="VerficationRequests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BrokerNetworkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BrokerNetworkConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="BrokerNetworkModel.Company" />
+          <EntitySet Name="CompanyBrokers" EntityType="BrokerNetworkModel.CompanyBroker" />
+          <EntitySet Name="CompanyTypes" EntityType="BrokerNetworkModel.CompanyType" />
+          <EntitySet Name="CompanyVerificationTypes" EntityType="BrokerNetworkModel.CompanyVerificationType" />
+          <EntitySet Name="CusomerPreviews" EntityType="BrokerNetworkModel.CusomerPreview" />
+          <EntitySet Name="Customer_CustomerStatus" EntityType="BrokerNetworkModel.Customer_CustomerStatus" />
+          <EntitySet Name="Customers" EntityType="BrokerNetworkModel.Customer" />
+          <EntitySet Name="CustomerStatus" EntityType="BrokerNetworkModel.CustomerStatu" />
+          <EntitySet Name="Files" EntityType="BrokerNetworkModel.File" />
+          <EntitySet Name="FilesLines" EntityType="BrokerNetworkModel.FilesLine" />
+          <EntitySet Name="Locations" EntityType="BrokerNetworkModel.Location" />
+          <EntitySet Name="OwnerShipTypes" EntityType="BrokerNetworkModel.OwnerShipType" />
+          <EntitySet Name="Permission_PermissionGroup" EntityType="BrokerNetworkModel.Permission_PermissionGroup" />
+          <EntitySet Name="PermissionGroups" EntityType="BrokerNetworkModel.PermissionGroup" />
+          <EntitySet Name="PreviewStatus" EntityType="BrokerNetworkModel.PreviewStatu" />
+          <EntitySet Name="Projects" EntityType="BrokerNetworkModel.Project" />
+          <EntitySet Name="ProjectStatus" EntityType="BrokerNetworkModel.ProjectStatu" />
+          <EntitySet Name="ProjectTypes" EntityType="BrokerNetworkModel.ProjectType" />
+          <EntitySet Name="Properties" EntityType="BrokerNetworkModel.Property" />
+          <EntitySet Name="PropertyFloorTypes" EntityType="BrokerNetworkModel.PropertyFloorType" />
+          <EntitySet Name="PropertyPictures" EntityType="BrokerNetworkModel.PropertyPicture" />
+          <EntitySet Name="PropertyPurposes" EntityType="BrokerNetworkModel.PropertyPurpose" />
+          <EntitySet Name="PropertyRequests" EntityType="BrokerNetworkModel.PropertyRequest" />
+          <EntitySet Name="PropertyRequests_FollowUp" EntityType="BrokerNetworkModel.PropertyRequests_FollowUp" />
+          <EntitySet Name="PropertyTypes" EntityType="BrokerNetworkModel.PropertyType" />
+          <EntitySet Name="RequestStatus" EntityType="BrokerNetworkModel.RequestStatu" />
+          <EntitySet Name="Shareds" EntityType="BrokerNetworkModel.Shared" />
+          <EntitySet Name="SpecialOffers" EntityType="BrokerNetworkModel.SpecialOffer" />
+          <EntitySet Name="Transactions" EntityType="BrokerNetworkModel.Transaction" />
+          <EntitySet Name="User_UserPermission" EntityType="BrokerNetworkModel.User_UserPermission" />
+          <EntitySet Name="UserGroups" EntityType="BrokerNetworkModel.UserGroup" />
+          <EntitySet Name="UserPermissions" EntityType="BrokerNetworkModel.UserPermission" />
+          <EntitySet Name="Users" EntityType="BrokerNetworkModel.User" />
+          <EntitySet Name="VerficationRequests" EntityType="BrokerNetworkModel.VerficationRequest" />
+          <EntitySet Name="VerficationStatus" EntityType="BrokerNetworkModel.VerficationStatu" />
+          <AssociationSet Name="FK_Companies_CompanyTypes" Association="BrokerNetworkModel.FK_Companies_CompanyTypes">
+            <End Role="CompanyType" EntitySet="CompanyTypes" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Companies_CompanyVerificationTypes" Association="BrokerNetworkModel.FK_Companies_CompanyVerificationTypes">
+            <End Role="CompanyVerificationType" EntitySet="CompanyVerificationTypes" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBrokers_Companies" Association="BrokerNetworkModel.FK_CompanyBrokers_Companies">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyBroker" EntitySet="CompanyBrokers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Companies" Association="BrokerNetworkModel.FK_Projects_Companies">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Companies" Association="BrokerNetworkModel.FK_Users_Companies">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerficationRequests_Companies" Association="BrokerNetworkModel.FK_VerficationRequests_Companies">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="VerficationRequest" EntitySet="VerficationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBrokers_Users" Association="BrokerNetworkModel.FK_CompanyBrokers_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyBroker" EntitySet="CompanyBrokers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusomerPreviews_Customers" Association="BrokerNetworkModel.FK_CusomerPreviews_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CusomerPreview" EntitySet="CusomerPreviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CusomerPreviews_PreviewStatus" Association="BrokerNetworkModel.FK_CusomerPreviews_PreviewStatus">
+            <End Role="PreviewStatu" EntitySet="PreviewStatus" />
+            <End Role="CusomerPreview" EntitySet="CusomerPreviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_CusomerPreviews" Association="BrokerNetworkModel.FK_Transactions_CusomerPreviews">
+            <End Role="CusomerPreview" EntitySet="CusomerPreviews" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_CustomerStatus_Customers" Association="BrokerNetworkModel.FK_Customer_CustomerStatus_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Customer_CustomerStatus" EntitySet="Customer_CustomerStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_CustomerStatus_CustomerStatus" Association="BrokerNetworkModel.FK_Customer_CustomerStatus_CustomerStatus">
+            <End Role="CustomerStatu" EntitySet="CustomerStatus" />
+            <End Role="Customer_CustomerStatus" EntitySet="Customer_CustomerStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_CustomerStatus" Association="BrokerNetworkModel.FK_Customers_CustomerStatus">
+            <End Role="CustomerStatu" EntitySet="CustomerStatus" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Users" Association="BrokerNetworkModel.FK_Customers_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Customers" Association="BrokerNetworkModel.FK_Transactions_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Locations" Association="BrokerNetworkModel.FK_Projects_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Locations" Association="BrokerNetworkModel.FK_Properties_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_Locations" Association="BrokerNetworkModel.FK_PropertyRequests_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PropertyRequest" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_OwnerShips" Association="BrokerNetworkModel.FK_Properties_OwnerShips">
+            <End Role="OwnerShipType" EntitySet="OwnerShipTypes" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_OwnerShips" Association="BrokerNetworkModel.FK_PropertyRequests_OwnerShips">
+            <End Role="OwnerShipType" EntitySet="OwnerShipTypes" />
+            <End Role="PropertyRequest" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_PermissionGroup_PermissionGroups" Association="BrokerNetworkModel.FK_Permission_PermissionGroup_PermissionGroups">
+            <End Role="PermissionGroup" EntitySet="PermissionGroups" />
+            <End Role="Permission_PermissionGroup" EntitySet="Permission_PermissionGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_PermissionGroup_UserPermission" Association="BrokerNetworkModel.FK_Permission_PermissionGroup_UserPermission">
+            <End Role="UserPermission" EntitySet="UserPermissions" />
+            <End Role="Permission_PermissionGroup" EntitySet="Permission_PermissionGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_ProjectStatus" Association="BrokerNetworkModel.FK_Projects_ProjectStatus">
+            <End Role="ProjectStatu" EntitySet="ProjectStatus" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_ProjectTypes" Association="BrokerNetworkModel.FK_Projects_ProjectTypes">
+            <End Role="ProjectType" EntitySet="ProjectTypes" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Projects" Association="BrokerNetworkModel.FK_Properties_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_FloorTypes" Association="BrokerNetworkModel.FK_Properties_FloorTypes">
+            <End Role="PropertyFloorType" EntitySet="PropertyFloorTypes" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_PropertyTypes" Association="BrokerNetworkModel.FK_Properties_PropertyTypes">
+            <End Role="PropertyType" EntitySet="PropertyTypes" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_SectionTypes" Association="BrokerNetworkModel.FK_Properties_SectionTypes">
+            <End Role="PropertyPurpose" EntitySet="PropertyPurposes" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Shared" Association="BrokerNetworkModel.FK_Properties_Shared">
+            <End Role="Shared" EntitySet="Shareds" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Users" Association="BrokerNetworkModel.FK_Properties_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyPictures_Properties" Association="BrokerNetworkModel.FK_PropertyPictures_Properties">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="PropertyPicture" EntitySet="PropertyPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_FloorTypes" Association="BrokerNetworkModel.FK_PropertyRequests_FloorTypes">
+            <End Role="PropertyFloorType" EntitySet="PropertyFloorTypes" />
+            <End Role="PropertyRequest" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_SectionTypes" Association="BrokerNetworkModel.FK_PropertyRequests_SectionTypes">
+            <End Role="PropertyPurpose" EntitySet="PropertyPurposes" />
+            <End Role="PropertyRequest" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_FollowUp_PropertyRequests" Association="BrokerNetworkModel.FK_PropertyRequests_FollowUp_PropertyRequests">
+            <End Role="PropertyRequest" EntitySet="PropertyRequests" />
+            <End Role="PropertyRequests_FollowUp" EntitySet="PropertyRequests_FollowUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_PropertyTypes" Association="BrokerNetworkModel.FK_PropertyRequests_PropertyTypes">
+            <End Role="PropertyType" EntitySet="PropertyTypes" />
+            <End Role="PropertyRequest" EntitySet="PropertyRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropertyRequests_FollowUp_RequestStatus" Association="BrokerNetworkModel.FK_PropertyRequests_FollowUp_RequestStatus">
+            <End Role="RequestStatu" EntitySet="RequestStatus" />
+            <End Role="PropertyRequests_FollowUp" EntitySet="PropertyRequests_FollowUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserPermission_UserPermission" Association="BrokerNetworkModel.FK_User_UserPermission_UserPermission">
+            <End Role="UserPermission" EntitySet="UserPermissions" />
+            <End Role="User_UserPermission" EntitySet="User_UserPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserPermission_Users" Association="BrokerNetworkModel.FK_User_UserPermission_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_UserPermission" EntitySet="User_UserPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserGroups" Association="BrokerNetworkModel.FK_Users_UserGroups">
+            <End Role="UserGroup" EntitySet="UserGroups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerficationRequests_Users" Association="BrokerNetworkModel.FK_VerficationRequests_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="VerficationRequest" EntitySet="VerficationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerficationRequests_VerficationStatus" Association="BrokerNetworkModel.FK_VerficationRequests_VerficationStatus">
+            <End Role="VerficationStatu" EntitySet="VerficationStatus" />
+            <End Role="VerficationRequest" EntitySet="VerficationRequests" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="BrokerNetworkModel.Comment" />
+          <AssociationSet Name="FK_Comments_Users" Association="BrokerNetworkModel.FK_Comments_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyVerificationTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contacts" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ImgPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CompanyType" Relationship="BrokerNetworkModel.FK_Companies_CompanyTypes" FromRole="Company" ToRole="CompanyType" />
+          <NavigationProperty Name="CompanyVerificationType" Relationship="BrokerNetworkModel.FK_Companies_CompanyVerificationTypes" FromRole="Company" ToRole="CompanyVerificationType" />
+          <NavigationProperty Name="CompanyBrokers" Relationship="BrokerNetworkModel.FK_CompanyBrokers_Companies" FromRole="Company" ToRole="CompanyBroker" />
+          <NavigationProperty Name="Projects" Relationship="BrokerNetworkModel.FK_Projects_Companies" FromRole="Company" ToRole="Project" />
+          <NavigationProperty Name="Users" Relationship="BrokerNetworkModel.FK_Users_Companies" FromRole="Company" ToRole="User" />
+          <NavigationProperty Name="VerficationRequests" Relationship="BrokerNetworkModel.FK_VerficationRequests_Companies" FromRole="Company" ToRole="VerficationRequest" />
+          <Property Name="ContactsForBrokers" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CompanyBroker">
+          <Key>
+            <PropertyRef Name="CompanyBrokerID" />
+          </Key>
+          <Property Name="CompanyBrokerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BrokerNetworkModel.FK_CompanyBrokers_Companies" FromRole="CompanyBroker" ToRole="Company" />
+          <NavigationProperty Name="User" Relationship="BrokerNetworkModel.FK_CompanyBrokers_Users" FromRole="CompanyBroker" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CompanyType">
+          <Key>
+            <PropertyRef Name="CompanyTypeID" />
+          </Key>
+          <Property Name="CompanyTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyTypeTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Companies" Relationship="BrokerNetworkModel.FK_Companies_CompanyTypes" FromRole="CompanyType" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="CompanyVerificationType">
+          <Key>
+            <PropertyRef Name="CompanyVerificationTypeID" />
+          </Key>
+          <Property Name="CompanyVerificationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VerificationTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Companies" Relationship="BrokerNetworkModel.FK_Companies_CompanyVerificationTypes" FromRole="CompanyVerificationType" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="CusomerPreview">
+          <Key>
+            <PropertyRef Name="CustomerPreviewID" />
+          </Key>
+          <Property Name="CustomerPreviewID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyID" Type="Int64" Nullable="false" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+          <Property Name="PreviewDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PreviewTime" Type="Time" Precision="7" />
+          <Property Name="PreviewStatusID" Type="Int32" Nullable="false" />
+          <Property Name="NoOfProperties" Type="Int32" Nullable="false" />
+          <Property Name="ShawAlertBeforeMinutes" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="BrokerNetworkModel.FK_CusomerPreviews_Customers" FromRole="CusomerPreview" ToRole="Customer" />
+          <NavigationProperty Name="PreviewStatu" Relationship="BrokerNetworkModel.FK_CusomerPreviews_PreviewStatus" FromRole="CusomerPreview" ToRole="PreviewStatu" />
+          <NavigationProperty Name="Transactions" Relationship="BrokerNetworkModel.FK_Transactions_CusomerPreviews" FromRole="CusomerPreview" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Customer_CustomerStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+          <Property Name="CustomerStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="BrokerNetworkModel.FK_Customer_CustomerStatus_Customers" FromRole="Customer_CustomerStatus" ToRole="Customer" />
+          <NavigationProperty Name="CustomerStatu" Relationship="BrokerNetworkModel.FK_Customer_CustomerStatus_CustomerStatus" FromRole="Customer_CustomerStatus" ToRole="CustomerStatu" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="CustomerStatusID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CusomerPreviews" Relationship="BrokerNetworkModel.FK_CusomerPreviews_Customers" FromRole="Customer" ToRole="CusomerPreview" />
+          <NavigationProperty Name="Customer_CustomerStatus" Relationship="BrokerNetworkModel.FK_Customer_CustomerStatus_Customers" FromRole="Customer" ToRole="Customer_CustomerStatus" />
+          <NavigationProperty Name="CustomerStatu" Relationship="BrokerNetworkModel.FK_Customers_CustomerStatus" FromRole="Customer" ToRole="CustomerStatu" />
+          <NavigationProperty Name="User" Relationship="BrokerNetworkModel.FK_Customers_Users" FromRole="Customer" ToRole="User" />
+          <NavigationProperty Name="Transactions" Relationship="BrokerNetworkModel.FK_Transactions_Customers" FromRole="Customer" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="CustomerStatu">
+          <Key>
+            <PropertyRef Name="CustomerStatusID" />
+          </Key>
+          <Property Name="CustomerStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerStatusTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer_CustomerStatus" Relationship="BrokerNetworkModel.FK_Customer_CustomerStatus_CustomerStatus" FromRole="CustomerStatu" ToRole="Customer_CustomerStatus" />
+          <NavigationProperty Name="Customers" Relationship="BrokerNetworkModel.FK_Customers_CustomerStatus" FromRole="CustomerStatu" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int64" Nullable="false" />
+          <Property Name="ParentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrginalFileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="FilesLine">
+          <Key>
+            <PropertyRef Name="FilesLineID" />
+          </Key>
+          <Property Name="FilesLineID" Type="Int64" Nullable="false" />
+          <Property Name="ParentID" Type="Int64" />
+          <Property Name="ParentTypeID" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Path" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="LocationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="BrokerNetworkModel.FK_Projects_Locations" FromRole="Location" ToRole="Project" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_Locations" FromRole="Location" ToRole="Property" />
+          <NavigationProperty Name="PropertyRequests" Relationship="BrokerNetworkModel.FK_PropertyRequests_Locations" FromRole="Location" ToRole="PropertyRequest" />
+        </EntityType>
+        <EntityType Name="OwnerShipType">
+          <Key>
+            <PropertyRef Name="OwnerShipTypeID" />
+          </Key>
+          <Property Name="OwnerShipTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerShipTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_OwnerShips" FromRole="OwnerShipType" ToRole="Property" />
+          <NavigationProperty Name="PropertyRequests" Relationship="BrokerNetworkModel.FK_PropertyRequests_OwnerShips" FromRole="OwnerShipType" ToRole="PropertyRequest" />
+        </EntityType>
+        <EntityType Name="Permission_PermissionGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionGroupID" Type="Int32" Nullable="false" />
+          <Property Name="UserPermissionID" Type="Int32" Nullable="false" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="PermissionGroup" Relationship="BrokerNetworkModel.FK_Permission_PermissionGroup_PermissionGroups" FromRole="Permission_PermissionGroup" ToRole="PermissionGroup" />
+          <NavigationProperty Name="UserPermission" Relationship="BrokerNetworkModel.FK_Permission_PermissionGroup_UserPermission" FromRole="Permission_PermissionGroup" ToRole="UserPermission" />
+        </EntityType>
+        <EntityType Name="PermissionGroup">
+          <Key>
+            <PropertyRef Name="PermissionGroupID" />
+          </Key>
+          <Property Name="PermissionGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Permission_PermissionGroup" Relationship="BrokerNetworkModel.FK_Permission_PermissionGroup_PermissionGroups" FromRole="PermissionGroup" ToRole="Permission_PermissionGroup" />
+        </EntityType>
+        <EntityType Name="PreviewStatu">
+          <Key>
+            <PropertyRef Name="PreviewStatusID" />
+          </Key>
+          <Property Name="PreviewStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CusomerPreviews" Relationship="BrokerNetworkModel.FK_CusomerPreviews_PreviewStatus" FromRole="PreviewStatu" ToRole="CusomerPreview" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="AddressDetails" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NoOfUnits" Type="Int32" Nullable="true" />
+          <Property Name="ProjectStatusID" Type="Int32" Nullable="false" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BrokerNetworkModel.FK_Projects_Companies" FromRole="Project" ToRole="Company" />
+          <NavigationProperty Name="Location" Relationship="BrokerNetworkModel.FK_Projects_Locations" FromRole="Project" ToRole="Location" />
+          <NavigationProperty Name="ProjectStatu" Relationship="BrokerNetworkModel.FK_Projects_ProjectStatus" FromRole="Project" ToRole="ProjectStatu" />
+          <NavigationProperty Name="ProjectType" Relationship="BrokerNetworkModel.FK_Projects_ProjectTypes" FromRole="Project" ToRole="ProjectType" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_Projects" FromRole="Project" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="ProjectStatu">
+          <Key>
+            <PropertyRef Name="ProjectStatusID" />
+          </Key>
+          <Property Name="ProjectStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="BrokerNetworkModel.FK_Projects_ProjectStatus" FromRole="ProjectStatu" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="ProjectType">
+          <Key>
+            <PropertyRef Name="ProjectTypeID" />
+          </Key>
+          <Property Name="ProjectTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Projects" Relationship="BrokerNetworkModel.FK_Projects_ProjectTypes" FromRole="ProjectType" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="AddressDetails" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectID" Type="Int32" />
+          <Property Name="IsUnit" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="CanInstallment" Type="Boolean" Nullable="false" />
+          <Property Name="NoOfYears" Type="Int32" />
+          <Property Name="DownPayment" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="FloorNum" Type="Int32" Nullable="false" />
+          <Property Name="PropertyFloorTypeID" Type="Int32" Nullable="false" />
+          <Property Name="NoOfProperties" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <Property Name="OwnerShipTypeID" Type="Int32" Nullable="false" />
+          <Property Name="PropertyTypeID" Type="Int32" Nullable="false" />
+          <Property Name="PropertyPurposeID" Type="Int32" Nullable="false" />
+          <Property Name="HasElevator" Type="Boolean" Nullable="false" />
+          <Property Name="HasGarage" Type="Boolean" Nullable="false" />
+          <Property Name="AllowVisitors" Type="Boolean" Nullable="false" />
+          <Property Name="Commission" Type="Double" />
+          <Property Name="NumberOfRooms" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfBathrooms" Type="Int32" Nullable="false" />
+          <Property Name="ReadyDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SharedID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="BrokerNetworkModel.FK_Properties_Locations" FromRole="Property" ToRole="Location" />
+          <NavigationProperty Name="OwnerShipType" Relationship="BrokerNetworkModel.FK_Properties_OwnerShips" FromRole="Property" ToRole="OwnerShipType" />
+          <NavigationProperty Name="Project" Relationship="BrokerNetworkModel.FK_Properties_Projects" FromRole="Property" ToRole="Project" />
+          <NavigationProperty Name="PropertyFloorType" Relationship="BrokerNetworkModel.FK_Properties_FloorTypes" FromRole="Property" ToRole="PropertyFloorType" />
+          <NavigationProperty Name="PropertyType" Relationship="BrokerNetworkModel.FK_Properties_PropertyTypes" FromRole="Property" ToRole="PropertyType" />
+          <NavigationProperty Name="PropertyPurpose" Relationship="BrokerNetworkModel.FK_Properties_SectionTypes" FromRole="Property" ToRole="PropertyPurpose" />
+          <NavigationProperty Name="Shared" Relationship="BrokerNetworkModel.FK_Properties_Shared" FromRole="Property" ToRole="Shared" />
+          <NavigationProperty Name="User" Relationship="BrokerNetworkModel.FK_Properties_Users" FromRole="Property" ToRole="User" />
+          <NavigationProperty Name="PropertyPictures" Relationship="BrokerNetworkModel.FK_PropertyPictures_Properties" FromRole="Property" ToRole="PropertyPicture" />
+          <Property Name="CommissionType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PropertyFloorType">
+          <Key>
+            <PropertyRef Name="PropertyFloorTypeID" />
+          </Key>
+          <Property Name="PropertyFloorTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorTypeTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_FloorTypes" FromRole="PropertyFloorType" ToRole="Property" />
+          <NavigationProperty Name="PropertyRequests" Relationship="BrokerNetworkModel.FK_PropertyRequests_FloorTypes" FromRole="PropertyFloorType" ToRole="PropertyRequest" />
+        </EntityType>
+        <EntityType Name="PropertyPicture">
+          <Key>
+            <PropertyRef Name="PropPictureID" />
+          </Key>
+          <Property Name="PropertyID" Type="Int64" Nullable="false" />
+          <Property Name="PropPictureID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PicturePath" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PropDesc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Property" Relationship="BrokerNetworkModel.FK_PropertyPictures_Properties" FromRole="PropertyPicture" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="PropertyPurpose">
+          <Key>
+            <PropertyRef Name="PropertyPurposeID" />
+          </Key>
+          <Property Name="PropertyPurposeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropPurposeTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_SectionTypes" FromRole="PropertyPurpose" ToRole="Property" />
+          <NavigationProperty Name="PropertyRequests" Relationship="BrokerNetworkModel.FK_PropertyRequests_SectionTypes" FromRole="PropertyPurpose" ToRole="PropertyRequest" />
+        </EntityType>
+        <EntityType Name="PropertyRequest">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="LocationIDs" Type="Int32" />
+          <Property Name="AddressDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MinPrice" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="CanInstallment" Type="Boolean" Nullable="false" />
+          <Property Name="NoOfYears" Type="Int32" />
+          <Property Name="PropertyFloorTypeID" Type="Int32" />
+          <Property Name="MinArea" Type="Int32" />
+          <Property Name="MaxArea" Type="Int32" />
+          <Property Name="OwnerShipTypeID" Type="Int32" />
+          <Property Name="PropertyTypeID" Type="Int32" />
+          <Property Name="PropertyPurposeID" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="BrokerNetworkModel.FK_PropertyRequests_Locations" FromRole="PropertyRequest" ToRole="Location" />
+          <NavigationProperty Name="OwnerShipType" Relationship="BrokerNetworkModel.FK_PropertyRequests_OwnerShips" FromRole="PropertyRequest" ToRole="OwnerShipType" />
+          <NavigationProperty Name="PropertyFloorType" Relationship="BrokerNetworkModel.FK_PropertyRequests_FloorTypes" FromRole="PropertyRequest" ToRole="PropertyFloorType" />
+          <NavigationProperty Name="PropertyPurpose" Relationship="BrokerNetworkModel.FK_PropertyRequests_SectionTypes" FromRole="PropertyRequest" ToRole="PropertyPurpose" />
+          <NavigationProperty Name="PropertyRequests_FollowUp" Relationship="BrokerNetworkModel.FK_PropertyRequests_FollowUp_PropertyRequests" FromRole="PropertyRequest" ToRole="PropertyRequests_FollowUp" />
+          <NavigationProperty Name="PropertyType" Relationship="BrokerNetworkModel.FK_PropertyRequests_PropertyTypes" FromRole="PropertyRequest" ToRole="PropertyType" />
+          <Property Name="GovID" Type="Int32" />
+          <Property Name="CityID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PropertyRequests_FollowUp">
+          <Key>
+            <PropertyRef Name="FollowUpID" />
+          </Key>
+          <Property Name="FollowUpID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestID" Type="Int64" Nullable="false" />
+          <Property Name="RequestStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PropertyRequest" Relationship="BrokerNetworkModel.FK_PropertyRequests_FollowUp_PropertyRequests" FromRole="PropertyRequests_FollowUp" ToRole="PropertyRequest" />
+          <NavigationProperty Name="RequestStatu" Relationship="BrokerNetworkModel.FK_PropertyRequests_FollowUp_RequestStatus" FromRole="PropertyRequests_FollowUp" ToRole="RequestStatu" />
+        </EntityType>
+        <EntityType Name="PropertyType">
+          <Key>
+            <PropertyRef Name="PropertyTypeID" />
+          </Key>
+          <Property Name="PropertyTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropTypeTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_PropertyTypes" FromRole="PropertyType" ToRole="Property" />
+          <NavigationProperty Name="PropertyRequests" Relationship="BrokerNetworkModel.FK_PropertyRequests_PropertyTypes" FromRole="PropertyType" ToRole="PropertyRequest" />
+        </EntityType>
+        <EntityType Name="RequestStatu">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PropertyRequests_FollowUp" Relationship="BrokerNetworkModel.FK_PropertyRequests_FollowUp_RequestStatus" FromRole="RequestStatu" ToRole="PropertyRequests_FollowUp" />
+        </EntityType>
+        <EntityType Name="Shared">
+          <Key>
+            <PropertyRef Name="ShareID" />
+          </Key>
+          <Property Name="ShareID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShareTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_Shared" FromRole="Shared" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="SpecialOffer">
+          <Key>
+            <PropertyRef Name="OfferID" />
+          </Key>
+          <Property Name="OfferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfferTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OfferDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ImgPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ByUserID" Type="Int64" />
+          <Property Name="SortOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="PreviewID" Type="Int64" Nullable="false" />
+          <Property Name="TransactionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyID" Type="Int64" Nullable="false" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+          <Property Name="PreviewDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PreviewTime" Type="Time" Precision="7" />
+          <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PreviewStatusID" Type="Int32" Nullable="false" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CusomerPreview" Relationship="BrokerNetworkModel.FK_Transactions_CusomerPreviews" FromRole="Transaction" ToRole="CusomerPreview" />
+          <NavigationProperty Name="Customer" Relationship="BrokerNetworkModel.FK_Transactions_Customers" FromRole="Transaction" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="User_UserPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="UserPermissionID" Type="Int32" Nullable="false" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="UserPermission" Relationship="BrokerNetworkModel.FK_User_UserPermission_UserPermission" FromRole="User_UserPermission" ToRole="UserPermission" />
+          <NavigationProperty Name="User" Relationship="BrokerNetworkModel.FK_User_UserPermission_Users" FromRole="User_UserPermission" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="UserGroupName" />
+          </Key>
+          <Property Name="UserGroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserGroupDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="BrokerNetworkModel.FK_Users_UserGroups" FromRole="UserGroup" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserPermission">
+          <Key>
+            <PropertyRef Name="UserPermissionID" />
+          </Key>
+          <Property Name="UserPermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ByUserID" Type="Int64" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Permission_PermissionGroup" Relationship="BrokerNetworkModel.FK_Permission_PermissionGroup_UserPermission" FromRole="UserPermission" ToRole="Permission_PermissionGroup" />
+          <NavigationProperty Name="User_UserPermission" Relationship="BrokerNetworkModel.FK_User_UserPermission_UserPermission" FromRole="UserPermission" ToRole="User_UserPermission" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="UserGroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVerfied" Type="Boolean" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FavouriteLocationIDs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImgPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="ByUserID" Type="Int64" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BrokerNetworkModel.FK_Users_Companies" FromRole="User" ToRole="Company" />
+          <NavigationProperty Name="CompanyBrokers" Relationship="BrokerNetworkModel.FK_CompanyBrokers_Users" FromRole="User" ToRole="CompanyBroker" />
+          <NavigationProperty Name="Customers" Relationship="BrokerNetworkModel.FK_Customers_Users" FromRole="User" ToRole="Customer" />
+          <NavigationProperty Name="Properties" Relationship="BrokerNetworkModel.FK_Properties_Users" FromRole="User" ToRole="Property" />
+          <NavigationProperty Name="User_UserPermission" Relationship="BrokerNetworkModel.FK_User_UserPermission_Users" FromRole="User" ToRole="User_UserPermission" />
+          <NavigationProperty Name="UserGroup" Relationship="BrokerNetworkModel.FK_Users_UserGroups" FromRole="User" ToRole="UserGroup" />
+          <NavigationProperty Name="VerficationRequests" Relationship="BrokerNetworkModel.FK_VerficationRequests_Users" FromRole="User" ToRole="VerficationRequest" />
+          <NavigationProperty Name="Comments" Relationship="BrokerNetworkModel.FK_Comments_Users" FromRole="User" ToRole="Comment" />
+          <Property Name="Provider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VerficationRequest">
+          <Key>
+            <PropertyRef Name="VerficationID" />
+          </Key>
+          <Property Name="VerficationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="RequestContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VerfiedStatusID" Type="Int32" />
+          <Property Name="AdminMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="BrokerNetworkModel.FK_VerficationRequests_Companies" FromRole="VerficationRequest" ToRole="Company" />
+          <NavigationProperty Name="User" Relationship="BrokerNetworkModel.FK_VerficationRequests_Users" FromRole="VerficationRequest" ToRole="User" />
+          <NavigationProperty Name="VerficationStatu" Relationship="BrokerNetworkModel.FK_VerficationRequests_VerficationStatus" FromRole="VerficationRequest" ToRole="VerficationStatu" />
+        </EntityType>
+        <EntityType Name="VerficationStatu">
+          <Key>
+            <PropertyRef Name="VerfiedStatusID" />
+          </Key>
+          <Property Name="VerfiedStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VerfiedStatusTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VerficationRequests" Relationship="BrokerNetworkModel.FK_VerficationRequests_VerficationStatus" FromRole="VerficationStatu" ToRole="VerficationRequest" />
+        </EntityType>
+        <Association Name="FK_Companies_CompanyTypes">
+          <End Type="BrokerNetworkModel.CompanyType" Role="CompanyType" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyType">
+              <PropertyRef Name="CompanyTypeID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Companies_CompanyVerificationTypes">
+          <End Type="BrokerNetworkModel.CompanyVerificationType" Role="CompanyVerificationType" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyVerificationType">
+              <PropertyRef Name="CompanyVerificationTypeID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyVerificationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBrokers_Companies">
+          <End Type="BrokerNetworkModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.CompanyBroker" Role="CompanyBroker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyBroker">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Companies">
+          <End Type="BrokerNetworkModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Companies">
+          <End Type="BrokerNetworkModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerficationRequests_Companies">
+          <End Type="BrokerNetworkModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.VerficationRequest" Role="VerficationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="VerficationRequest">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBrokers_Users">
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.CompanyBroker" Role="CompanyBroker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CompanyBroker">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusomerPreviews_Customers">
+          <End Type="BrokerNetworkModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.CusomerPreview" Role="CusomerPreview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CusomerPreview">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CusomerPreviews_PreviewStatus">
+          <End Type="BrokerNetworkModel.PreviewStatu" Role="PreviewStatu" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.CusomerPreview" Role="CusomerPreview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreviewStatu">
+              <PropertyRef Name="PreviewStatusID" />
+            </Principal>
+            <Dependent Role="CusomerPreview">
+              <PropertyRef Name="PreviewStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_CusomerPreviews">
+          <End Type="BrokerNetworkModel.CusomerPreview" Role="CusomerPreview" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CusomerPreview">
+              <PropertyRef Name="CustomerPreviewID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="PreviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_CustomerStatus_Customers">
+          <End Type="BrokerNetworkModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Customer_CustomerStatus" Role="Customer_CustomerStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_CustomerStatus">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_CustomerStatus_CustomerStatus">
+          <End Type="BrokerNetworkModel.CustomerStatu" Role="CustomerStatu" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Customer_CustomerStatus" Role="Customer_CustomerStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerStatu">
+              <PropertyRef Name="CustomerStatusID" />
+            </Principal>
+            <Dependent Role="Customer_CustomerStatus">
+              <PropertyRef Name="CustomerStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_CustomerStatus">
+          <End Type="BrokerNetworkModel.CustomerStatu" Role="CustomerStatu" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerStatu">
+              <PropertyRef Name="CustomerStatusID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CustomerStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Users">
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="ByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Customers">
+          <End Type="BrokerNetworkModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Locations">
+          <End Type="BrokerNetworkModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Locations">
+          <End Type="BrokerNetworkModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_Locations">
+          <End Type="BrokerNetworkModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.PropertyRequest" Role="PropertyRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="PropertyRequest">
+              <PropertyRef Name="LocationIDs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_OwnerShips">
+          <End Type="BrokerNetworkModel.OwnerShipType" Role="OwnerShipType" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerShipType">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_OwnerShips">
+          <End Type="BrokerNetworkModel.OwnerShipType" Role="OwnerShipType" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.PropertyRequest" Role="PropertyRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerShipType">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Principal>
+            <Dependent Role="PropertyRequest">
+              <PropertyRef Name="OwnerShipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_PermissionGroup_PermissionGroups">
+          <End Type="BrokerNetworkModel.PermissionGroup" Role="PermissionGroup" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Permission_PermissionGroup" Role="Permission_PermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionGroup">
+              <PropertyRef Name="PermissionGroupID" />
+            </Principal>
+            <Dependent Role="Permission_PermissionGroup">
+              <PropertyRef Name="PermissionGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_PermissionGroup_UserPermission">
+          <End Type="BrokerNetworkModel.UserPermission" Role="UserPermission" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Permission_PermissionGroup" Role="Permission_PermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserPermission">
+              <PropertyRef Name="UserPermissionID" />
+            </Principal>
+            <Dependent Role="Permission_PermissionGroup">
+              <PropertyRef Name="UserPermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_ProjectStatus">
+          <End Type="BrokerNetworkModel.ProjectStatu" Role="ProjectStatu" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectStatu">
+              <PropertyRef Name="ProjectStatusID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ProjectStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_ProjectTypes">
+          <End Type="BrokerNetworkModel.ProjectType" Role="ProjectType" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectType">
+              <PropertyRef Name="ProjectTypeID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ProjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Projects">
+          <End Type="BrokerNetworkModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_FloorTypes">
+          <End Type="BrokerNetworkModel.PropertyFloorType" Role="PropertyFloorType" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyFloorType">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_PropertyTypes">
+          <End Type="BrokerNetworkModel.PropertyType" Role="PropertyType" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="PropertyTypeID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="PropertyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_SectionTypes">
+          <End Type="BrokerNetworkModel.PropertyPurpose" Role="PropertyPurpose" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyPurpose">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Shared">
+          <End Type="BrokerNetworkModel.Shared" Role="Shared" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shared">
+              <PropertyRef Name="ShareID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="SharedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Users">
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="ByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyPictures_Properties">
+          <End Type="BrokerNetworkModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.PropertyPicture" Role="PropertyPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropertyID" />
+            </Principal>
+            <Dependent Role="PropertyPicture">
+              <PropertyRef Name="PropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_FloorTypes">
+          <End Type="BrokerNetworkModel.PropertyFloorType" Role="PropertyFloorType" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.PropertyRequest" Role="PropertyRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyFloorType">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Principal>
+            <Dependent Role="PropertyRequest">
+              <PropertyRef Name="PropertyFloorTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_SectionTypes">
+          <End Type="BrokerNetworkModel.PropertyPurpose" Role="PropertyPurpose" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.PropertyRequest" Role="PropertyRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyPurpose">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Principal>
+            <Dependent Role="PropertyRequest">
+              <PropertyRef Name="PropertyPurposeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_FollowUp_PropertyRequests">
+          <End Type="BrokerNetworkModel.PropertyRequest" Role="PropertyRequest" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.PropertyRequests_FollowUp" Role="PropertyRequests_FollowUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyRequest">
+              <PropertyRef Name="RequestID" />
+            </Principal>
+            <Dependent Role="PropertyRequests_FollowUp">
+              <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_PropertyTypes">
+          <End Type="BrokerNetworkModel.PropertyType" Role="PropertyType" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.PropertyRequest" Role="PropertyRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="PropertyTypeID" />
+            </Principal>
+            <Dependent Role="PropertyRequest">
+              <PropertyRef Name="PropertyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropertyRequests_FollowUp_RequestStatus">
+          <End Type="BrokerNetworkModel.RequestStatu" Role="RequestStatu" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.PropertyRequests_FollowUp" Role="PropertyRequests_FollowUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatu">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="PropertyRequests_FollowUp">
+              <PropertyRef Name="RequestStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserPermission_UserPermission">
+          <End Type="BrokerNetworkModel.UserPermission" Role="UserPermission" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.User_UserPermission" Role="User_UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserPermission">
+              <PropertyRef Name="UserPermissionID" />
+            </Principal>
+            <Dependent Role="User_UserPermission">
+              <PropertyRef Name="UserPermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserPermission_Users">
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.User_UserPermission" Role="User_UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User_UserPermission">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserGroups">
+          <End Type="BrokerNetworkModel.UserGroup" Role="UserGroup" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="UserGroupName" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserGroupName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerficationRequests_Users">
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="1" />
+          <End Type="BrokerNetworkModel.VerficationRequest" Role="VerficationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="VerficationRequest">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerficationRequests_VerficationStatus">
+          <End Type="BrokerNetworkModel.VerficationStatu" Role="VerficationStatu" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.VerficationRequest" Role="VerficationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VerficationStatu">
+              <PropertyRef Name="VerfiedStatusID" />
+            </Principal>
+            <Dependent Role="VerficationRequest">
+              <PropertyRef Name="VerfiedStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="PostID" Type="Int64" />
+          <Property Name="PostType" Type="Int32" />
+          <Property Name="CommentMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="BrokerNetworkModel.FK_Comments_Users" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Comments_Users">
+          <End Type="BrokerNetworkModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="BrokerNetworkModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BrokerNetworkModelStoreContainer" CdmEntityContainer="BrokerNetworkConnection">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="ContactsForBrokers" ColumnName="ContactsForBrokers" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CompanyTypeID" ColumnName="CompanyTypeID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyVerificationTypeID" ColumnName="CompanyVerificationTypeID" />
+                <ScalarProperty Name="CompanyDesc" ColumnName="CompanyDesc" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyBrokers">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.CompanyBroker">
+              <MappingFragment StoreEntitySet="CompanyBrokers">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyBrokerID" ColumnName="CompanyBrokerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyTypes">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.CompanyType">
+              <MappingFragment StoreEntitySet="CompanyTypes">
+                <ScalarProperty Name="CompanyTypeTitle" ColumnName="CompanyTypeTitle" />
+                <ScalarProperty Name="CompanyTypeID" ColumnName="CompanyTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyVerificationTypes">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.CompanyVerificationType">
+              <MappingFragment StoreEntitySet="CompanyVerificationTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="VerificationTitle" ColumnName="VerificationTitle" />
+                <ScalarProperty Name="CompanyVerificationTypeID" ColumnName="CompanyVerificationTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CusomerPreviews">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.CusomerPreview">
+              <MappingFragment StoreEntitySet="CusomerPreviews">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ShawAlertBeforeMinutes" ColumnName="ShawAlertBeforeMinutes" />
+                <ScalarProperty Name="NoOfProperties" ColumnName="NoOfProperties" />
+                <ScalarProperty Name="PreviewStatusID" ColumnName="PreviewStatusID" />
+                <ScalarProperty Name="PreviewTime" ColumnName="PreviewTime" />
+                <ScalarProperty Name="PreviewDate" ColumnName="PreviewDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="CustomerPreviewID" ColumnName="CustomerPreviewID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_CustomerStatus">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Customer_CustomerStatus">
+              <MappingFragment StoreEntitySet="Customer_CustomerStatus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CustomerStatusID" ColumnName="CustomerStatusID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerStatusID" ColumnName="CustomerStatusID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerStatus">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.CustomerStatu">
+              <MappingFragment StoreEntitySet="CustomerStatus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="CustomerStatusTitle" ColumnName="CustomerStatusTitle" />
+                <ScalarProperty Name="CustomerStatusID" ColumnName="CustomerStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.File">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OrginalFileName" ColumnName="OrginalFileName" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ParentType" ColumnName="ParentType" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilesLines">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.FilesLine">
+              <MappingFragment StoreEntitySet="FilesLines">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ParentTypeID" ColumnName="ParentTypeID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="FilesLineID" ColumnName="FilesLineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerShipTypes">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.OwnerShipType">
+              <MappingFragment StoreEntitySet="OwnerShipTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="OwnerShipTitle" ColumnName="OwnerShipTitle" />
+                <ScalarProperty Name="OwnerShipTypeID" ColumnName="OwnerShipTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permission_PermissionGroup">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Permission_PermissionGroup">
+              <MappingFragment StoreEntitySet="Permission_PermissionGroup">
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="UserPermissionID" ColumnName="UserPermissionID" />
+                <ScalarProperty Name="PermissionGroupID" ColumnName="PermissionGroupID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermissionGroups">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PermissionGroup">
+              <MappingFragment StoreEntitySet="PermissionGroups">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="PermissionGroupID" ColumnName="PermissionGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreviewStatus">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PreviewStatu">
+              <MappingFragment StoreEntitySet="PreviewStatus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="StatusTitle" ColumnName="StatusTitle" />
+                <ScalarProperty Name="PreviewStatusID" ColumnName="PreviewStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="ProjectStatusID" ColumnName="ProjectStatusID" />
+                <ScalarProperty Name="NoOfUnits" ColumnName="NoOfUnits" />
+                <ScalarProperty Name="AddressDetails" ColumnName="AddressDetails" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectTypeID" ColumnName="ProjectTypeID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectStatus">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.ProjectStatu">
+              <MappingFragment StoreEntitySet="ProjectStatus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="StatusTitle" ColumnName="StatusTitle" />
+                <ScalarProperty Name="ProjectStatusID" ColumnName="ProjectStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTypes">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.ProjectType">
+              <MappingFragment StoreEntitySet="ProjectTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProjectTypeName" ColumnName="ProjectTypeName" />
+                <ScalarProperty Name="ProjectTypeID" ColumnName="ProjectTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Property">
+              <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="CommissionType" ColumnName="CommissionType" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="SharedID" ColumnName="SharedID" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="ReadyDate" ColumnName="ReadyDate" />
+                <ScalarProperty Name="NumberOfBathrooms" ColumnName="NumberOfBathrooms" />
+                <ScalarProperty Name="NumberOfRooms" ColumnName="NumberOfRooms" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="AllowVisitors" ColumnName="AllowVisitors" />
+                <ScalarProperty Name="HasGarage" ColumnName="HasGarage" />
+                <ScalarProperty Name="HasElevator" ColumnName="HasElevator" />
+                <ScalarProperty Name="PropertyPurposeID" ColumnName="PropertyPurposeID" />
+                <ScalarProperty Name="PropertyTypeID" ColumnName="PropertyTypeID" />
+                <ScalarProperty Name="OwnerShipTypeID" ColumnName="OwnerShipTypeID" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="NoOfProperties" ColumnName="NoOfProperties" />
+                <ScalarProperty Name="PropertyFloorTypeID" ColumnName="PropertyFloorTypeID" />
+                <ScalarProperty Name="FloorNum" ColumnName="FloorNum" />
+                <ScalarProperty Name="DownPayment" ColumnName="DownPayment" />
+                <ScalarProperty Name="NoOfYears" ColumnName="NoOfYears" />
+                <ScalarProperty Name="CanInstallment" ColumnName="CanInstallment" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsUnit" ColumnName="IsUnit" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="AddressDetails" ColumnName="AddressDetails" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyFloorTypes">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PropertyFloorType">
+              <MappingFragment StoreEntitySet="PropertyFloorTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="FloorTypeTitle" ColumnName="FloorTypeTitle" />
+                <ScalarProperty Name="PropertyFloorTypeID" ColumnName="PropertyFloorTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyPictures">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PropertyPicture">
+              <MappingFragment StoreEntitySet="PropertyPictures">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="PropDesc" ColumnName="PropDesc" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+                <ScalarProperty Name="PropPictureID" ColumnName="PropPictureID" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyPurposes">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PropertyPurpose">
+              <MappingFragment StoreEntitySet="PropertyPurpose">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="PropPurposeTitle" ColumnName="PropPurposeTitle" />
+                <ScalarProperty Name="PropertyPurposeID" ColumnName="PropertyPurposeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyRequests">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PropertyRequest">
+              <MappingFragment StoreEntitySet="PropertyRequests">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="GovID" ColumnName="GovID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="PropertyPurposeID" ColumnName="PropertyPurposeID" />
+                <ScalarProperty Name="PropertyTypeID" ColumnName="PropertyTypeID" />
+                <ScalarProperty Name="OwnerShipTypeID" ColumnName="OwnerShipTypeID" />
+                <ScalarProperty Name="MaxArea" ColumnName="MaxArea" />
+                <ScalarProperty Name="MinArea" ColumnName="MinArea" />
+                <ScalarProperty Name="PropertyFloorTypeID" ColumnName="PropertyFloorTypeID" />
+                <ScalarProperty Name="NoOfYears" ColumnName="NoOfYears" />
+                <ScalarProperty Name="CanInstallment" ColumnName="CanInstallment" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="AddressDetails" ColumnName="AddressDetails" />
+                <ScalarProperty Name="LocationIDs" ColumnName="LocationIDs" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyRequests_FollowUp">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PropertyRequests_FollowUp">
+              <MappingFragment StoreEntitySet="PropertyRequests_FollowUp">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="RequestStatusID" ColumnName="RequestStatusID" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="FollowUpID" ColumnName="FollowUpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyTypes">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.PropertyType">
+              <MappingFragment StoreEntitySet="PropertyTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="PropTypeTitle" ColumnName="PropTypeTitle" />
+                <ScalarProperty Name="PropertyTypeID" ColumnName="PropertyTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestStatus">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.RequestStatu">
+              <MappingFragment StoreEntitySet="RequestStatus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="StatusTitle" ColumnName="StatusTitle" />
+                <ScalarProperty Name="RequestStatusID" ColumnName="RequestStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shareds">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Shared">
+              <MappingFragment StoreEntitySet="Shared">
+                <ScalarProperty Name="ShareTitle" ColumnName="ShareTitle" />
+                <ScalarProperty Name="ShareID" ColumnName="ShareID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialOffers">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.SpecialOffer">
+              <MappingFragment StoreEntitySet="SpecialOffers">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="OfferDesc" ColumnName="OfferDesc" />
+                <ScalarProperty Name="OfferTitle" ColumnName="OfferTitle" />
+                <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="PreviewStatusID" ColumnName="PreviewStatusID" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="PreviewTime" ColumnName="PreviewTime" />
+                <ScalarProperty Name="PreviewDate" ColumnName="PreviewDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="PreviewID" ColumnName="PreviewID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_UserPermission">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.User_UserPermission">
+              <MappingFragment StoreEntitySet="User_UserPermission">
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="UserPermissionID" ColumnName="UserPermissionID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroups">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroups">
+                <ScalarProperty Name="UserGroupDesc" ColumnName="UserGroupDesc" />
+                <ScalarProperty Name="UserGroupName" ColumnName="UserGroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPermissions">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.UserPermission">
+              <MappingFragment StoreEntitySet="UserPermission">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="PermissionTitle" ColumnName="PermissionTitle" />
+                <ScalarProperty Name="UserPermissionID" ColumnName="UserPermissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ByUserID" ColumnName="ByUserID" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ProfileImgPath" ColumnName="ProfileImgPath" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="FavouriteLocationIDs" ColumnName="FavouriteLocationIDs" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IsVerfied" ColumnName="IsVerfied" />
+                <ScalarProperty Name="UserGroupName" ColumnName="UserGroupName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VerficationRequests">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.VerficationRequest">
+              <MappingFragment StoreEntitySet="VerficationRequests">
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="AdminMessage" ColumnName="AdminMessage" />
+                <ScalarProperty Name="VerfiedStatusID" ColumnName="VerfiedStatusID" />
+                <ScalarProperty Name="RequestContent" ColumnName="RequestContent" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="VerficationID" ColumnName="VerficationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VerficationStatus">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.VerficationStatu">
+              <MappingFragment StoreEntitySet="VerficationStatus">
+                <ScalarProperty Name="VerfiedStatusTitle" ColumnName="VerfiedStatusTitle" />
+                <ScalarProperty Name="VerfiedStatusID" ColumnName="VerfiedStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="BrokerNetworkModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CommentMsg" ColumnName="CommentMsg" />
+                <ScalarProperty Name="PostType" ColumnName="PostType" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

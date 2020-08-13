@@ -1,0 +1,22 @@
+﻿@model IEnumerable<BrokerNetwork.Models.User>
+@{
+    ViewBag.Title = "الوسطاء";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+
+        <div class="actions">
+            <div class="dropdown actions__item">
+                <i data-toggle="dropdown" class="zmdi zmdi-more-vert" aria-expanded="false"></i>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a onclick="Refresh()" class="dropdown-item">تحديث</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        @Html.Partial("_Brokers",Model)
+    </div>
+</div>

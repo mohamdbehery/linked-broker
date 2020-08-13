@@ -1,0 +1,254 @@
+﻿@model BrokerNetwork.Models.Model.PropertyDisplay
+
+@{
+
+    ViewBag.Title = "وحداتى";
+    var Owner = "";
+    if (Model.CompanyID.HasValue && Model.CompanyID.Value > 0)
+    {
+        Owner = Model.CompanyName;
+    }
+    else
+    {
+        Owner = Model.FullName;
+    }
+
+    var ReadyDate = "استلام فورى";
+    if (Model.ReadyDate != DateTime.MinValue)
+    {
+        if (Model.ReadyDate > DateTime.Now)
+        {
+            ReadyDate = Model.ReadyDate.ToShortDateString();
+        }
+    }
+
+    var CommissionType = "";
+    if(Model.CommissionType == 1)
+    {
+        CommissionType = "عمولة مطلوب منك دفعها للطرف الآخر";
+    }
+    else
+    {
+        CommissionType = "عمولة سوف يقوم الطرف الآخر بدفعها لك";
+    }
+
+
+    var ShowComissionDisclaimer = false;
+    if (User.Identity.IsAuthenticated)
+    {
+
+        ShowComissionDisclaimer = true;
+        //var crUser = new BrokerNetwork.Models.Model.AppUser(User as System.Security.Claims.ClaimsPrincipal);
+        //if (crUser.UserID != Model.UserID)
+        //{
+        //    ShowComissionDisclaimer = true;
+        //}
+    }
+}
+
+<div class="prop-details-view">
+    <div class="clearfix"></div>
+    <br />
+    <h2 class="title1">
+        @Model.Title
+    </h2>
+    <h3 class="sub-title1">
+        @Model.PropTypeTitle @Model.PropPurposeTitle  <span class="en-number">@Model.Area</span> متر - @Model.OwnerShipTitle
+        (@Model.GovernorateName > @Model.CityName > @Model.AreaName)
+    </h3>
+    <h4 class="sub-title2">@Model.AddressDetails</h4>
+    <div class="col-lg-8 col-sm-12 float-left">
+        <div class="w3-content w3-display-container">
+            @{
+                if (Model.Images.Count > 0)
+                {
+                    foreach (var item in Model.Images)
+                    {
+                        <img onerror='this.src = "/img/default.jpg"' onclick="MaximizaImage(this.src)" class="mySlides" src="~/Uploads/Properties/@item">
+                    }
+                }
+                else
+                {
+                    <img onerror='this.src = "/img/default.jpg"' class="mySlides" src="~/img/default.jpg">
+                }
+            }
+
+            <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10095;</button>
+            <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10094;</button>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-12 float-right">
+        <div class="row desc1">
+            <label class="col-sm-6">تاريخ الاضافة : <span class="text-right en-number">@Model.EntryDate.ToShortDateString()</span></label>
+            <label class="col-sm-6">
+                الطابق :
+                @if (@Model.FloorNum > 0)
+                {
+                    <span class="text-right en-number">@Model.FloorNum </span>
+                }
+                (@Model.FloorTypeTitle)
+            </label>
+        </div>
+        <div class="row desc1">
+            <label class="col-md-6 col-sm-12">عدد الغرف : <span class="text-right en-number">@Model.NumberOfRooms</span></label>
+            <label class="col-md-6 col-sm-12">عدد الحمامات : <span class="text-right en-number">@Model.NumberOfBathrooms</span></label>
+
+        </div>
+        <div class="row desc1">
+            <label class="col-md-6 col-sm-12">السعر : <span class="text-right en-number">@Model.Price</span></label>
+            @if (Model.Commission != null && User.Identity.IsAuthenticated)
+            {
+                <label class="col-md-6 col-sm-12">
+                    العمولة : <span class="text-right en-number">@Model.Commission%</span>
+                    @if (ShowComissionDisclaimer)
+                    {
+                        <br />
+                        <span class="disclaimer">
+                            @*"عمولة سوف يقوم (@Owner) بدفعها"*@
+                            @CommissionType
+                        </span>
+                    }
+                </label>
+            }
+        </div>
+        <div class="row desc1">
+            <label class="col-sm-12">
+                قابلية التقسيط : <span class="text-right en-number">
+                    @if (Model.CanInstallment)
+                    {
+                        <span>
+                            تقبل التقسيط
+                            @if (Model.DownPayment > 0)
+                            {
+                                <span>
+                                    بمقدم (@Model.DownPayment)
+                                    @if (Model.NoOfYears > 0)
+                                    {
+                                        <span>
+                                            على (@Model.NoOfYears) سنة
+                                        </span>
+                                    }
+                                </span>
+                            }
+                        </span>
+                    }
+                    else
+                    {
+                        <span>لا تقبل</span>
+                    }
+                </span>
+            </label>
+        </div>
+        <div class="row desc1">
+            <label class="col-md-6 col-sm-12">
+                المصعد : <span class="text-right en-number">
+                    @if (Model.HasElevator)
+                    {
+                        <span>
+                            يوجد
+                        </span>
+                    }
+                    else
+                    {
+                        <span>لا يوجد</span>
+                    }
+                </span>
+            </label>
+            <label class="col-md-6 col-sm-12">
+                الجراج : <span class="text-right en-number">
+                    @if (Model.HasGarage)
+                    {
+                        <span>
+                            يوجد
+                        </span>
+                    }
+                    else
+                    {
+                        <span>لا يوجد</span>
+                    }
+                </span>
+            </label>
+        </div>
+        <div class="row desc1">
+            <label class="col-md-6 col-sm-12">
+                التشطيب : <span class="text-right en-number">
+                    <span>
+                        @Model.PropPurposeTitle
+                    </span>
+                </span>
+            </label>
+            <label class="col-md-6 col-sm-12">
+                تاريخ الاستلام : <span class="text-right en-number">
+                    <span>
+                        @ReadyDate
+                    </span>
+                </span>
+            </label>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.Contacts))
+            {
+            <div class="row desc1">
+                <label class="col-sm-12">
+                    بيانات الاتصال : <span class="text-right en-number">@Model.Contacts</span>
+                    @if (!string.IsNullOrEmpty(Model.ContactsForBrokers))
+                    {
+                        <label>
+                            وللوسطاء: <span class="text-right en-number">@Model.ContactsForBrokers</span>
+                        </label>
+                    }
+                </label>
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.Comments))
+            {
+            <div class="desc2">
+                @Model.Comments
+            </div>
+        }
+        @if (Model.CompanyID.HasValue && Model.CompanyID.Value > 0)
+            {
+            <div class="desc3 text-center">
+                <a href="/CompanyDetails/@Model.CompanyID">@Model.CompanyName</a>
+                @if (Model.ProjectID.HasValue && Model.ProjectID.Value > 0)
+                {
+                    <div>
+                        (<a href="/ProjectDetails/@Model.ProjectID"> @Model.ProjectName </a>)
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="desc3 text-center">
+                <a href="/BrokerDetails/@Model.UserID">@Model.FullName</a>
+            </div>
+        }
+    </div>
+    <div class="clearfix"></div>
+</div>
+@if (Model.MatchedRequests != null && Model.MatchedRequests.Count > 0)
+{
+    <div id="divMatchedPropsOfRequest" class="card">
+        <div class="card-header">
+            <h1 class="card-title">طلبات متطابقة (<span class="en-number">@Model.MatchedRequests.Count</span> وحدة)</h1>
+        </div>
+        <div class="clearfix"></div>
+        <div class="card-block">
+            @{
+                var filter = new BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>();
+                filter.Data = Model.MatchedRequests;
+                filter.DataType = BrokerNetwork.Models.Model.FilterListDataType.Requests;
+                filter.ShowPagingButtons = false;
+            }
+            @Html.Partial("_PropertiesView", filter)
+        </div>
+    </div>
+                }
+
+@{
+   var commentsModel = new CommentModel();
+   commentsModel.Comments = Model.PostComments;
+   commentsModel.PostID = Model.PropertyID;
+   commentsModel.PostType = CommentsPostTypes.Property;
+}
+@Html.Partial("_Comments", commentsModel)

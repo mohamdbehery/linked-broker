@@ -1,0 +1,271 @@
+﻿@model BrokerNetwork.Models.PropertyRequest
+
+@{
+
+    string action = ViewBag.Action;
+    if (action.Equals("Edit"))
+    {
+        ViewBag.Title = "تعديل طلب";
+    }
+    else
+    {
+        ViewBag.Title = "إضافة طلب";
+    }
+}
+
+
+@using (Html.BeginForm(action, "PropertyRequests", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+        <div class="card-block">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.RequestID)
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                عنوان الطلب
+                            </label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label for-ddl">
+                                المحافظة
+                            </label>
+                            <div class="form-group">
+                                <select id="ddlGovernorateID" name="GovID" class="form-control"></select>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label for-ddl">
+                                المدينة
+                            </label>
+                            <div class="form-group">
+                                <select id="ddlCityID" name="CityID" class="form-control"></select>
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label for-ddl">
+                                المنطقة
+                            </label>
+                            <div class="form-group">
+                                <select id="LocationIDs" name="LocationIDs" class="form-control"></select>
+                                @Html.Hidden("txtHiddenLocation", Model.LocationIDs != null ? Model.LocationIDs : 0)
+                                @*@Html.DropDownList("LocationIDs", ViewBag.Locations as SelectList, "غير محدد", htmlAttributes: new { @class = "form-control" })*@
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.LocationIDs, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                العنوان
+                            </label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.AddressDetails, new { htmlAttributes = new { @class = "form-control" } })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.AddressDetails, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                أقل سعر
+                            </label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.MinPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.MinPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                أقصى سعر
+                            </label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.MaxPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.MaxPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                إمكانية التقسيط
+                            </label>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(model => model.CanInstallment, new { @class = " form-check-input" })
+                                    <i class="form-group__bar"></i>
+                                    @Html.ValidationMessageFor(model => model.CanInstallment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                عدد السنوات
+                            </label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.NoOfYears, new { htmlAttributes = new { @class = "form-control" } })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.NoOfYears, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label for-ddl">
+                                الطابق
+                            </label>
+                            <div class="form-group">
+                                @Html.DropDownList("PropertyFloorTypeID", ViewBag.PropertyFloorType as SelectList, "غير محدد", htmlAttributes: new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.PropertyFloorTypeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                أقل مساحة
+                            </label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.MinArea, new { htmlAttributes = new { @class = "form-control" } })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.MinArea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label">
+                                أقصى مساحة
+                            </label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.MaxArea, new { htmlAttributes = new { @class = "form-control" } })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.MaxArea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label for-ddl">
+                                ملكية الوحدة
+                            </label>
+                            <div class="form-group">
+                                @Html.DropDownList("OwnerShipTypeID", ViewBag.OwnerShipType as SelectList, "غير محدد", htmlAttributes: new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.OwnerShipTypeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label for-ddl">
+                                نوع الوحدة
+                            </label>
+                            <div class="form-group">
+                                @Html.DropDownList("PropertyTypeID", ViewBag.PropertyType as SelectList, "غير محدد", htmlAttributes: new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.PropertyTypeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="inline-label for-ddl">
+                                الغرض
+                            </label>
+                            <div class="form-group">
+                                @Html.DropDownList("PropertyPurposeID", ViewBag.PropertyPurpose as SelectList, htmlAttributes: new { @class = "form-control" })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.PropertyPurposeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-sm-6">
+                            <div class="input-group">
+                                <label class="inline-label">
+                                    نشط
+                                </label>
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(model => model.IsActive, new { @class = " form-check-input" })
+                                    <i class="form-group__bar"></i>
+                                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        ملاحظات
+                        <div class="input-group">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control text-area" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 text-center">
+                        <input type="submit" value="حفظ" id="btnAddRequest" class="btn btn-default custom-btn-search" /> &nbsp;
+                        @Html.ActionLink("إلغاء", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        SiteConstants.PropReqGovID = '@ViewBag.GovID';
+        SiteConstants.PropReqCityID = '@ViewBag.CityID';
+        SiteConstants.PropReqLocationIDs = '@ViewBag.LocationIDs';
+    </script>
+}

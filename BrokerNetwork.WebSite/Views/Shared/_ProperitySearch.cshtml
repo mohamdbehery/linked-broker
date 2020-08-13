@@ -1,0 +1,144 @@
+﻿@model BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>
+
+
+<form class="form-horizontal" method="get" action="" name="frmSearch">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group col-md-10">
+                <label class="inline-label for-ddl">
+                    المحافظة
+                </label>
+                <div class="form-group">
+                    <select id="ddlGovernorateID" name="govID" class="form-control"></select>
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group col-md-10">
+                <label class="inline-label for-ddl">
+                    المدينة
+                </label>
+                <div class="form-group">
+                    <select id="ddlCityID" name="ctyID" class="form-control"></select>
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group col-md-10">
+                <label class="inline-label for-ddl">
+                    المنطقة
+                </label>
+                <div class="form-group">
+                    <select id="rID" name="rID" class="form-control"></select>
+                    @*@Html.DropDownList("rID", ViewBag.Regions as SelectList, htmlAttributes: new { @class = "form-control" })*@
+
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group col-md-10">
+                <label class="inline-label for-ddl">
+                    نوع الوحدة
+                </label>
+                <div class="form-group">
+                    @Html.DropDownList("utID", ViewBag.PropertyTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group col-md-10">
+                <label class="inline-label">
+                    السعر (جنيه)
+                </label>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.pFrom, new { htmlAttributes = new { @class = "form-control", @placeholder = "من" } })
+
+                    @*<input name="pFrom" id="txtPriceFrom" type="number" placeholder="من" class="form-control" />*@
+                    <i class="form-group__bar"></i>
+                </div>
+                &nbsp;&nbsp;
+                <div class="form-group">
+                    @Html.EditorFor(model => model.pTo, new { htmlAttributes = new { @class = "form-control", @placeholder = "إلى" } })
+
+                    @*<input name="pTo" id="txtPriceTo" type="number" placeholder="إلى" class="form-control" />*@
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group col-md-10">
+                <label class="inline-label">
+                    المساحة (م2)
+                </label>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.aFrom, new { htmlAttributes = new { @class = "form-control", @placeholder = "من" } })
+
+                    @*@Html.TextBoxFor(x => x.aFrom, new htmlAttr)*@
+                    @*<input name="aFrom" id="txtAreaFrom" type="number" placeholder="من" class="form-control" />*@
+                    <i class="form-group__bar"></i>
+                </div>
+                &nbsp;&nbsp;
+                <div class="form-group">
+                    @Html.EditorFor(model => model.aTo, new { htmlAttributes = new { @class = "form-control", @placeholder = "إلى" } })
+
+                    @*<input name="aTo" id="txtAreaTo" type="number" placeholder="إلى" class="form-control" />*@
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 HideElement">
+            <div class="input-group col-md-10">
+                <label class="inline-label for-ddl">
+                    نوع المشروع
+                </label>
+                <div class="form-group">
+                    @Html.DropDownList("ptID", ViewBag.ProjectTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group col-md-10">
+                <label class="inline-label for-ddl">
+                    الطابق
+                </label>
+                <div class="form-group">
+                    @*<select id="ptID" name="ptID" class="form-control">
+                        <option>اختر</option>
+                    </select>*@
+                    @Html.DropDownList("ftID", ViewBag.FloorTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+
+            <div class="input-group col-md-10">
+                <label class="inline-label">
+                    وسطاء موثقين
+                </label>
+                <div class="form-group">
+                    @Html.CheckBoxFor(x => x.isV, new { @class = "form-check-input", @style = "margin: 12px;" })
+                    @*<input name="isV" id="chbIsVerified" style="margin: 12px;" type="checkbox" class="form-check-input" />*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <br />
+        <div class="col-sm-12 text-center">
+            <input type="submit" value="بحث" class="btn btn-default custom-btn-search" />
+        </div>
+    </div>
+</form>

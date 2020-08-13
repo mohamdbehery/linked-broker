@@ -1,0 +1,110 @@
+﻿@model BrokerNetwork.WebSite.Models.CompanyBrokersModel
+
+@{
+    ViewBag.Title = "وسطاء الشركة";
+}
+
+
+
+@using (Html.BeginForm("CompanyBroker", "Companies", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-header header-without-margin">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+        <div class="card-block">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.CompanyID)
+            <div class="hint">
+                <div class="hint-right">
+                    قم بتقديم طلب توثيق لشركتك ليتم توثيق جميع أعضاء الشركة - بعض الشركات تعرض مشروعاتها للأعضاء الموثقين فقط
+                </div>
+                <div class="hint-left text-danger">
+                     يمكنك اضافة حتى <span class="en-number">5</span> وسطاء
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <label class="inline-label">
+                            البريد الالكترونى
+                        </label>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.SearchBroker, new { htmlAttributes = new { @class = "form-control" } })
+                            <i class="form-group__bar"></i>
+                            @if (!string.IsNullOrEmpty(Model.Msg))
+                            {
+                                if (Model.SearchStatus)
+                                {
+                                    <span class="text-success">@Model.Msg</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">@Model.Msg</span>
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.SearchBroker, "من فضلك أدخل البريد اللإلكترونى", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 text-center">
+                    <input type="submit" value="إضافة" class="btn btn-primary custom-btn-search" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">وسطاء الشركة</h3>
+
+    </div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <table id="data-table" class="table table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th>
+                            الشركة
+                        </th>
+                        <th>
+                            الوسيط
+                        </th>
+                        <th>
+                            الخيارات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Brokers)
+                    {
+                        <tr>
+                            <th>
+                                @item.Company.CompanyName
+                            </th>
+                            <td>
+                                @item.User.FullName
+                            </td>
+                            <td class="actions-btns">
+                                <a onclick="ShowModal('Companies/DeleteCompanyBroker/@item.CompanyBrokerID')" title="حذف"><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

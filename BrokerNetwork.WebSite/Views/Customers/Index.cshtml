@@ -1,0 +1,30 @@
+﻿<style>
+    .k-grid-content-locked tr td {
+        overflow: visible;
+    }
+    /*
+    #grid .k-grid-header {
+        padding-left: 0 !important;
+    }*/
+</style>
+<div class="row">
+    <div class="col-md-12 text-center">
+        @Html.ActionLink("إضافة عميل", "Create", null, new { @class = "btn btn-success btn-lg" })
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div ng-controller="customersCtrl" ng-init="kool='zoka'">
+            {{kool}}
+            <kendo-grid id="grid" options="kendoGridOptions">
+            </kendo-grid>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/app/customers/customersServices.js"></script>
+    <script src="~/app/customers/customersCtrl.js"></script>
+}

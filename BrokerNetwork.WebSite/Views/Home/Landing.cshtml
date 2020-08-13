@@ -1,0 +1,20 @@
+﻿@model BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>
+
+@{
+    ViewBag.Title = "المعروض";
+}
+
+<div class="card" id="divLanding">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+        <div class="title-img" id="divLandingSearch">
+            <i class="zmdi zmdi-search"></i>
+        </div>
+    </div>
+    <div class="card-block">
+        <div id="divLandingProperitiesSearch">
+            @Html.Partial("_ProperitySearch", Model)
+        </div>
+        @Html.Partial("_PropertiesView", Model)
+    </div>
+</div>

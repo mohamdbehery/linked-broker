@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokerNetwork.API", "BrokerNetwork.API\BrokerNetwork.API.csproj", "{2584C5FC-8D66-456B-894B-7E2C21D128E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokerNetwork.WebSite", "BrokerNetwork.WebSite\BrokerNetwork.WebSite.csproj", "{8E9706C1-3FAD-487A-AC47-77CAB57BA2E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokerNetwork.Models", "BrokerNetwork.Models\BrokerNetwork.Models.csproj", "{67D8B7A6-19AA-436C-82F4-41EFAE65E212}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2584C5FC-8D66-456B-894B-7E2C21D128E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2584C5FC-8D66-456B-894B-7E2C21D128E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2584C5FC-8D66-456B-894B-7E2C21D128E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2584C5FC-8D66-456B-894B-7E2C21D128E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E9706C1-3FAD-487A-AC47-77CAB57BA2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E9706C1-3FAD-487A-AC47-77CAB57BA2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E9706C1-3FAD-487A-AC47-77CAB57BA2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E9706C1-3FAD-487A-AC47-77CAB57BA2E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D8B7A6-19AA-436C-82F4-41EFAE65E212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D8B7A6-19AA-436C-82F4-41EFAE65E212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D8B7A6-19AA-436C-82F4-41EFAE65E212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D8B7A6-19AA-436C-82F4-41EFAE65E212}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9AEB2C71-9DDC-4522-9C7F-15E0AB63F3E2}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://elbehery.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BrokerNetwork.API\\BrokerNetwork.API.csproj
+		SccProjectName1 = BrokerNetwork.API
+		SccLocalPath1 = BrokerNetwork.API
+		SccProjectUniqueName2 = BrokerNetwork.Models\\BrokerNetwork.Models.csproj
+		SccProjectName2 = BrokerNetwork.Models
+		SccLocalPath2 = BrokerNetwork.Models
+		SccProjectUniqueName3 = BrokerNetwork.WebSite\\BrokerNetwork.WebSite.csproj
+		SccProjectName3 = BrokerNetwork.WebSite
+		SccLocalPath3 = BrokerNetwork.WebSite
+	EndGlobalSection
+EndGlobal

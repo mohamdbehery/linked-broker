@@ -1,0 +1,91 @@
+﻿@model BrokerNetwork.Models.SpecialOffer
+
+@{
+
+    string action = ViewBag.Action;
+    if (action.Equals("Edit"))
+    {
+        ViewBag.Title = "تعديل العرض";
+    }
+    else
+    {
+        ViewBag.Title = "إضافة عرض";
+    }
+}
+
+
+@using (Html.BeginForm(action, "SpecialOffers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+        <div class="card-block">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.OfferID)
+            <div class="row">
+                <div class="col-sm-12">
+                    عنوان العرض
+                    <div class="input-group">
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.OfferTitle, new { @class = "form-control" })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.OfferTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    المحتوى
+                    <div class="input-group">
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.OfferDesc, new { @class = "form-control Custom-textarea" })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.OfferDesc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <label class="inline-label">
+                            الصور
+                        </label>
+                        <div class="form-group">
+                            <label class="custom-file-upload">
+                                <input type="file" name="fupOfferImg" />
+                                <i class="zmdi zmdi-plus zmdi-hc-fw"></i>
+                                صورة العرض
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <label class="inline-label">
+                            تفعيل
+                        </label>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.IsActive, new { @class = " form-check-input" })
+                                <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger " })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 text-center">
+                    <input type="submit" value="حفظ" class="btn btn-primary custom-btn-search" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,51 @@
+﻿@model BrokerNetwork.Models.Project
+@{
+    ViewBag.Title = Model.ProjectName;
+
+    var PfImage = (BrokerNetwork.Models.File)ViewBag.ProjectImg;
+   
+    var properties =(List<BrokerNetwork.Models.Property>) ViewBag.Properties;
+}
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">وحدات المشروع (@Model.ProjectName)</h1>
+        @if (PfImage != null)
+        {
+            <img class="title-img" src="~/Uploads/Projects/@PfImage.FileName" />
+        }
+    </div>
+    <div class="card-block">
+        @foreach (var item in properties)
+        {
+            var images = (List<BrokerNetwork.Models.File>)ViewBag.Images;
+            BrokerNetwork.Models.File fImage = null;
+            if (images != null && images.Count > 0)
+            {
+                fImage = images.Where(x => x.ParentID == item.PropertyID).FirstOrDefault();
+            }
+            <div class="row hori-rpt">
+                <div class="col-md-3">
+                    <a href="/PropertyDetails/@item.PropertyID">
+                        @if (fImage != null)
+                        {
+                            <img class="img-thumbnail" src="~/Uploads/Properties/@fImage.FileName" />
+                        }
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <h3 class="full-width">
+                        <a href="/PropertyDetails/@item.PropertyID">@item.Title</a>
+                    </h3>
+                    تاريخ الاضافة: &nbsp;
+                    @item.EntryDate.ToShortDateString()
+                    <br />
+                    العنوان: &nbsp;
+                    @item.Location.LocationName , @item.AddressDetails
+                </div>
+
+            </div>
+
+            <hr class="repeated-hr" />
+        }
+    </div>
+</div>

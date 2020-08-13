@@ -1,0 +1,35 @@
+﻿@model BrokerNetwork.Models.Model.FilterList<BrokerNetwork.Models.Model.PropertyShortDisplay>
+
+@{
+    ViewBag.Title = "الرئيسية";
+}
+
+<div class="section-index">
+    <h4>مرحبا بك فى LinkedBrokers</h4>
+    <p>LinkedBrokers هو موقع تواصل اجتماعى خاص بالوسطاء العقاريين وشركات التطوير والتسويق العقارى لتسهيل تبادل البيانات <br /> قم بانشاء  <a href="/Users/Register">حساب جديد</a> او <a href="/Home/Login">سجل دخولك</a> وتمتع بمزايا التطبيق</p>
+
+    <div class="clearfix"></div>
+
+    <div class="site-diagram">
+        <div class="diagram-line"></div>
+        <div class="site-diagram-item"><a href="/Register"> إنشاء حساب</a> </div>
+        <div class="site-diagram-item"><a href="/Login"> تسجيل <br /> <span> دخول </span></a></div>
+        <div class="site-diagram-item"><a onclick="ShowModal('/', true, 'معلومات', 'هذه نسخة تجريبية والموقع غير مسئول عن أى تعاملات')" title="الشروط والأحكام">الشروط <br /> <span> والأحكام</span></a></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+<div class="index-props">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">ابحث عن شقتك</h1>
+        </div>
+        <div class="card-block">
+            @Html.Partial("_ProperitySearch", Model)
+        </div>
+    </div>
+    <h4>الوحدات المتاحة للزوار</h4>
+    @Html.Partial("_PropertiesView", Model)
+    <div class="clearfix"></div>
+</div>

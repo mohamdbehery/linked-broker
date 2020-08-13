@@ -1,0 +1,147 @@
+﻿@model BrokerNetwork.Models.User
+
+@{
+    ViewBag.Title = "ملفى الشخصى";
+}
+
+
+@using (Html.BeginForm("MyProfile", "Users", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @*@Html.HiddenFor(x => x.UserID)*@
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">@ViewBag.Title</h1>
+
+        </div>
+        <div class="card-block">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="row">
+                @if (!string.IsNullOrEmpty(Model.ProfileImgPath))
+                {
+                    <img src="~/Uploads/PersonalImages/@Model.ProfileImgPath" class="content-image-prof img-responsive" />
+
+                }
+                else
+                {
+                    <img src="~/img/person.png" class="content-image-prof img-responsive" />
+
+                }
+            </div>
+            <br />
+            
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <label class="inline-label">
+                            الاسم كاملا
+                        </label>
+                        <div class="form-group">
+                            <label class="" style="padding-top: 9px; padding-right: 5px;">@Model.FullName</label>
+</div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <label class="inline-label">
+                            البريد الالكترونى
+                        </label>
+                        <div class="form-group">
+                            @if (Model.IsConfirmed)
+                            {
+                                <label class="" style="padding-top: 9px; padding-right: 5px;">
+                                    @Model.Email
+                                </label>
+                            }
+                            else
+                            {
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            <i class="form-group__bar"></i>
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <label class="inline-label">
+                            الموبايل
+                        </label>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group ">
+                        <label class="inline-label">
+                            الصورة الشخصية
+                        </label>
+
+                        <div class="form-group">
+                            <label class="custom-file-upload">
+                                <input type="file" name="fuPersonalImage" />
+                                <i class="zmdi zmdi-plus zmdi-hc-fw"></i>
+                                تغيير
+                                @Html.ValidationMessageFor(model => model.ProfileImgPath, "", new { @class = "text-danger" })
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    كلمة عن نفسك
+                    <div class="input-group">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control text-area" } })
+                            <i class="form-group__bar"></i>
+                            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <input type="submit" value="تعديل" class="btn btn-default custom-btn-search" />
+                </div>
+            </div>
+            @{
+                var msg = ViewBag.Msg;
+                var suc = ViewBag.SuccessMsg;
+            }
+            @if (!string.IsNullOrEmpty(msg))
+            {
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-danger">
+                            @msg
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(suc))
+            {
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-success">
+                            @suc
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

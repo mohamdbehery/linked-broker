@@ -1,0 +1,13 @@
+﻿@model IEnumerable<BrokerNetwork.Models.User>
+@{
+    ViewBag.Title = "الوسطاء";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">@ViewBag.Title</h1>
+    </div>
+    <div class="card-block">
+        @Html.Partial("_Brokers", Model)
+    </div>
+</div>

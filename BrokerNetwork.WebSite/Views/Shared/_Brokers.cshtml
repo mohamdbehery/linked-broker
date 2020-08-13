@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BrokerNetwork.Models.User>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="prop-rpt-view prop-rpt-view-without-bg broker-rpt col-md-2 col-sm-4">
+            <a href="/BrokerDetails/@item.UserID">
+                <div class="prop-rpt-img">
+                    @if (!string.IsNullOrEmpty(item.ProfileImgPath))
+                    {
+                        <img src="~/Uploads/PersonalImages/@item.ProfileImgPath" class="img-responsive img-circle" />
+                    }
+                    else
+                    {
+                        <img src="~/img/person.png" class="img-responsive img-circle" />
+                    }
+                </div>
+                <div class="prop-rpt-details">
+                    <h2 class="title1 text-center">
+                        @item.FullName
+                    </h2>
+                </div>
+            </a>
+        </div>
+    }
+</div>
